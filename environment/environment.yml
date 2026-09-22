@@ -1,0 +1,19 @@
+name: graphmae2-dominance-diagnostics
+channels:
+  - pytorch
+  - conda-forge
+dependencies:
+  - python
+  - matplotlib
+  - numpy
+  - psutil
+  - pyyaml
+  - scikit-learn
+  - scipy
+  - pip
+  - pip:
+      - dgl
+      - ogb
+      - tensorboardX
+      - torch
+      - tqdm

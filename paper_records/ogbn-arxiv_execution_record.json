@@ -1,0 +1,54 @@
+{
+  "provenance": {
+    "status": "verified from retained execution protocol, schedule manifest, and completed training record",
+    "configuration_role": "paper-facing execution record",
+    "upstream_default_sha256": "81cd7d468fdb6127314bd0a8273ee1ccaf5b2b9d71cdffa78a4635b615abdeed",
+    "standalone_historical_yaml_retained": false
+  },
+  "model_and_optimizer": {
+    "encoder": "gat",
+    "decoder": "gat",
+    "num_layers": 4,
+    "num_dec_layers": 1,
+    "num_hidden": 1024,
+    "num_heads": 8,
+    "num_out_heads": 1,
+    "residual": true,
+    "norm": "layernorm",
+    "activation": "prelu",
+    "in_drop": 0.2,
+    "attn_drop": 0.1,
+    "mask_rate": 0.5,
+    "remask_rate": 0.5,
+    "remask_method": "random",
+    "num_remasking": 3,
+    "drop_edge_rate": 0.5,
+    "loss_fn": "sce",
+    "alpha_l": 6,
+    "optimizer": "adamw",
+    "lr": 0.0025,
+    "weight_decay": 0.06,
+    "scheduler": true,
+    "scheduler_horizon_epochs": 60,
+    "delayed_ema_epoch": 40,
+    "momentum": 0.996
+  },
+  "execution": {
+    "dataset": "ogbn-arxiv",
+    "batch_size": 128,
+    "epochs": 12,
+    "updates_per_epoch": 711,
+    "total_updates": 8532,
+    "drop_last": false,
+    "gradient_accumulation": false,
+    "pretraining_seeds": [0, 1, 2],
+    "latent_coefficients": [10.0, 0.3]
+  },
+  "linear_probe": {
+    "batch_size": 256,
+    "epochs": 1000,
+    "lr": 0.005,
+    "weight_decay": 0.0001,
+    "seeds": [54321, 54322, 54323]
+  }
+}

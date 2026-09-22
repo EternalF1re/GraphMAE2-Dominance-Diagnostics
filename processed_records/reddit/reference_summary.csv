@@ -1,0 +1,2 @@
+dataset,reference_coefficient,dominance_ratio,bootstrap_lower,bootstrap_upper,record_count,checkpoint_updates,target_roots_per_batch,batches_per_checkpoint,bootstrap_resamples
+reddit,10,12.62592612939547,11.463302621964752,14.199962981296819,32,"5755;14388",64,16,10000

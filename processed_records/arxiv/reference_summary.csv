@@ -1,0 +1,2 @@
+dataset,reference_coefficient,dominance_ratio,bootstrap_lower,bootstrap_upper,record_count,checkpoint_updates,target_roots_per_batch,batches_per_checkpoint,bootstrap_resamples
+ogbn-arxiv,10,31.7653148904106,29.849883433713472,44.0618155456329,32,"250;711",128,16,10000

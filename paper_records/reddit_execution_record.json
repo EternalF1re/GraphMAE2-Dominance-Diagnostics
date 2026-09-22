@@ -1,0 +1,63 @@
+{
+  "provenance": {
+    "status": "verified from retained effective configuration, resource-adaptation freeze, schedule manifests, and execution protocol",
+    "classification": "ported resource-adapted protocol",
+    "official_graphmae2_reddit_configuration": false,
+    "standalone_historical_yaml_retained": false,
+    "mathematical_source": "verified Arxiv model and optimizer configuration with documented dataset adaptations"
+  },
+  "model_and_optimizer": {
+    "encoder": "gat",
+    "decoder": "gat",
+    "num_layers": 4,
+    "num_dec_layers": 1,
+    "num_hidden": 1024,
+    "num_heads": 8,
+    "num_out_heads": 1,
+    "residual": true,
+    "norm": "layernorm",
+    "activation": "prelu",
+    "in_drop": 0.2,
+    "attn_drop": 0.1,
+    "mask_rate": 0.5,
+    "remask_rate": 0.5,
+    "remask_method": "random",
+    "num_remasking": 3,
+    "drop_edge_rate": 0.5,
+    "loss_fn": "sce",
+    "alpha_l": 6,
+    "optimizer": "adamw",
+    "lr": 0.0025,
+    "weight_decay": 0.06,
+    "scheduler": true,
+    "scheduler_horizon_epochs": 60,
+    "delayed_ema_epoch": 40,
+    "momentum": 0.996
+  },
+  "execution": {
+    "dataset": "reddit",
+    "batch_size": 64,
+    "epochs": 12,
+    "updates_per_epoch": 2398,
+    "total_updates": 28776,
+    "train_root_count": 153431,
+    "drop_last": false,
+    "gradient_accumulation": false,
+    "pretraining_seeds": [1, 2, 3],
+    "latent_coefficients": [10.0, 0.5]
+  },
+  "dataset_adaptation": {
+    "feature_dimension": 602,
+    "class_count": 41,
+    "pretraining_topology": "official train-induced subgraph",
+    "feature_scaling": "StandardScaler fitted to the full feature tensor",
+    "self_loops": "remove all, then add exactly one per node"
+  },
+  "linear_probe": {
+    "batch_size": 256,
+    "epochs": 1000,
+    "lr": 0.005,
+    "weight_decay": 0.0001,
+    "seeds": [54321, 54322, 54323]
+  }
+}

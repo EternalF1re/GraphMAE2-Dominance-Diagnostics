@@ -1,0 +1,8 @@
+method,weighting_strategy,validation_auc_mean,validation_auc_sample_sd,additional_full_training_trajectories,extra_gradient_computation,overhead_mode
+CoV-Weighting,dynamic,0.7115836116559644,0.0006053363150698822,3,0,online throughout pretraining
+Equal lambda=1,static,0.7113288310256985,0.0007325617316687622,3,0,standard pretraining
+GradNorm,dynamic,0.7106107035448523,0.000941876913115475,3,8532,online throughout pretraining
+Ours lambda=0.3,diagnostic-derived static,0.7103970570912983,0.0002434065672813137,0,0,offline diagnostic plus standard pretraining
+Uncertainty Weighting,dynamic,0.7098485879703763,0.00044909825599646685,3,0,online throughout pretraining
+PCGrad@lambda=10,gradient surgery,0.7049436203017614,0.00031748089661764366,3,8532,online throughout pretraining
+Original lambda=10,static,0.7045411901029482,0.0015362445111720287,3,0,standard pretraining

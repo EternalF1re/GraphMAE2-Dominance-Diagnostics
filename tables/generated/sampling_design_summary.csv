@@ -1,0 +1,3 @@
+dataset,checkpoint_updates,batches_per_checkpoint,degree_strata,batches_per_stratum,target_roots_per_batch,selection,bootstrap_resamples
+ogbn-arxiv,250;711,16,4,4,128,four complete batches selected by deterministic SHA-256 ranking,10000
+reddit,5755;14388,16,4,4,64,four complete batches selected by deterministic SHA-256 ranking,10000

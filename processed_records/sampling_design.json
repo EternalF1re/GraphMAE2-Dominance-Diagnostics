@@ -1,0 +1,37 @@
+{
+  "degree_definition": "full preprocessed graph in-degree of target/root nodes",
+  "later_procedure": {
+    "candidate_unit": "complete batch from the frozen first-epoch training schedule",
+    "candidate_score": "median target/root-node in-degree",
+    "degree_strata": "four dataset-specific equal-count rank partitions of candidate batches",
+    "tie_breaker": "training-schedule position",
+    "selection_within_stratum": "four complete batches selected by deterministic SHA-256 ranking",
+    "replacement": false,
+    "target_lists_reused_across_checkpoints": true,
+    "panels": "after selection, sorted batch hashes at indices 0 and 2 form panel A; indices 1 and 3 form panel B",
+    "aggregation": "pooled median over 32 checkpoint-by-batch dominance ratios",
+    "bootstrap": "10000 deterministic resamples preserving checkpoint-by-degree-stratum cell counts"
+  },
+  "datasets": {
+    "ogbn-arxiv": {
+      "checkpoint_updates": [250, 711],
+      "batches_per_checkpoint": 16,
+      "batches_per_stratum": 4,
+      "target_roots_per_batch": 128,
+      "selected_unique_target_roots": 2048,
+      "sampled_subgraph_node_range": [31939, 32609]
+    },
+    "reddit": {
+      "checkpoint_updates": [5755, 14388],
+      "batches_per_checkpoint": 16,
+      "batches_per_stratum": 4,
+      "target_roots_per_batch": 64,
+      "selected_unique_target_roots": 1024,
+      "sampled_subgraph_node_range": [14178, 15636]
+    }
+  },
+  "not_retained": [
+    "fixed numeric degree cutpoints, because the implementation uses rank partitions",
+    "exact masked/reconstruction-node counts"
+  ]
+}

@@ -1,0 +1,4 @@
+dataset,diagnostic_unit,checkpoint_updates,reference_weighted_ratio,later_weighted_ratio,checkpoint_median_ratio,interpretation
+cora,full graph shared encoder representation,"400;1000",6.575011615350309e-10,,98.39494444697237,latent gradient numerically near zero and time-sensitive
+citeseer,full graph shared encoder representation,"100;250",9.616085641623546e-7,,29.31016570279685,latent gradient numerically near zero and time-sensitive
+wikics,full graph temporal diagnostic,"400;1000",2.153795259807738e-2,1.1604030792105146e-8,,approximately 1.85608e6-fold temporal collapse

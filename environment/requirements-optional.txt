@@ -1,0 +1,6 @@
+# Optional upstream experiment logging. Version not retained.
+wandb
+
+# Optional LC-artifact preprocessing. Install from its upstream project;
+# the exact package version was not retained and is intentionally not pinned.
+localgraphclustering
