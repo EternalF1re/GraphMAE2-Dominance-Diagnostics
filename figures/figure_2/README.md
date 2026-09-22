@@ -1,6 +1,6 @@
 # Figure 2
 
 `figure_2_reference.pdf` is the frozen paper-facing artifact. Run
-`python plot_dominance_performance.py` to read the released Arxiv response and
-cross-dataset records and write `reproduced/figure_2.pdf`. The rerun is not a
-manifest-tracked replacement for the reference PDF.
+`python plot_protocol_parameters.py` to reproduce the gamma and remasking
+response panels from `input/`; the default output is
+`reproduced/figure_2.pdf`, outside the frozen manifest.

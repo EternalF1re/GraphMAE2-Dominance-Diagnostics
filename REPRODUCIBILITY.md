@@ -13,8 +13,8 @@ is outside the zero-data analysis workflow.
 | Item | Script | Canonical input | Frozen artifact | Default rerun output |
 |---|---|---|---|---|
 | Figure 1 | `figures/figure_1/plot_validation_trajectory.py` | `processed_records/arxiv/validation_trajectory.csv` | `figures/figure_1/figure_1_reference.pdf` | `figures/figure_1/reproduced/figure_1.pdf` |
-| Figure 2 | `figures/figure_2/plot_dominance_performance.py` | Arxiv response and cross-dataset records | `figures/figure_2/figure_2_reference.pdf` | `figures/figure_2/reproduced/figure_2.pdf` |
-| Figure 3 | `figures/figure_3/plot_protocol_parameters.py` | `processed_records/arxiv/protocol_parameter_response.csv` | `figures/figure_3/figure_3_reference.pdf` | `figures/figure_3/reproduced/figure_3.pdf` |
+| Figure 2 | `figures/figure_2/plot_protocol_parameters.py` | `processed_records/arxiv/protocol_parameter_response.csv` | `figures/figure_2/figure_2_reference.pdf` | `figures/figure_2/reproduced/figure_2.pdf` |
+| Figure 3 | `figures/figure_3/plot_dominance_performance.py` | Arxiv response and cross-dataset records | `figures/figure_3/figure_3_reference.pdf` | `figures/figure_3/reproduced/figure_3.pdf` |
 | Figure 4 | `figures/figure_4/plot_reddit_replication.py` | `processed_records/reddit/replication.csv` | `figures/figure_4/figure_4_reference.pdf` | `figures/figure_4/reproduced/figure_4.pdf` |
 | Appendix conflicts | `figures/appendix_conflicts/plot_pcgrad_conflicts.py` | PCGrad histogram bins | `figures/appendix_conflicts/appendix_conflicts_reference.pdf` | `figures/appendix_conflicts/reproduced/appendix_conflicts.pdf` |
 

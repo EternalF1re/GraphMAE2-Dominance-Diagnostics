@@ -15,14 +15,14 @@ from pathlib import Path, PurePosixPath
 
 TEXT_SUFFIXES = {".py", ".md", ".csv", ".json", ".yml", ".yaml", ".txt", ".sha256"}
 FORBIDDEN_SUFFIXES = {".pt", ".pth", ".ckpt", ".bin", ".npy", ".npz", ".log", ".pyc"}
-GENERATED_OUTPUT_DIRS = {"reproduced"}
+IGNORED_DIRECTORIES = {".git", "reproduced"}
 REQUIRED_DIRECTORIES = {
     "code", "environment", "figures", "paper_records", "processed_records", "protocols", "tables", "tests"
 }
 
 
-def is_generated_output(path: Path, root: Path) -> bool:
-    return bool(GENERATED_OUTPUT_DIRS.intersection(path.relative_to(root).parts))
+def is_ignored_path(path: Path, root: Path) -> bool:
+    return bool(IGNORED_DIRECTORIES.intersection(path.relative_to(root).parts))
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -57,7 +57,7 @@ def scan_text_and_paths(root: Path) -> list[str]:
     findings = []
     patterns = sensitive_patterns()
     for path in sorted(root.rglob("*")):
-        if is_generated_output(path, root):
+        if is_ignored_path(path, root):
             continue
         relative = path.relative_to(root).as_posix()
         for label, pattern in patterns:
@@ -118,9 +118,9 @@ def verify_records(root: Path) -> None:
 
     figure_inputs = {
         "figures/figure_1/input/validation_trajectory.csv": "processed_records/arxiv/validation_trajectory.csv",
-        "figures/figure_2/input/dominance_performance.csv": "processed_records/arxiv/dominance_performance.csv",
-        "figures/figure_2/input/cross_dataset_dominance.csv": "processed_records/method_comparisons/cross_dataset_dominance.csv",
-        "figures/figure_3/input/protocol_parameter_response.csv": "processed_records/arxiv/protocol_parameter_response.csv",
+        "figures/figure_2/input/protocol_parameter_response.csv": "processed_records/arxiv/protocol_parameter_response.csv",
+        "figures/figure_3/input/dominance_performance.csv": "processed_records/arxiv/dominance_performance.csv",
+        "figures/figure_3/input/cross_dataset_dominance.csv": "processed_records/method_comparisons/cross_dataset_dominance.csv",
         "figures/figure_4/input/replication.csv": "processed_records/reddit/replication.csv",
         "figures/appendix_conflicts/input/pcgrad_conflict_histogram.csv": "processed_records/method_comparisons/pcgrad_conflict_histogram.csv",
     }
@@ -131,7 +131,7 @@ def verify_records(root: Path) -> None:
 def expected_manifest(root: Path) -> dict[str, str]:
     entries = {}
     for path in sorted(candidate for candidate in root.rglob("*") if candidate.is_file()):
-        if is_generated_output(path, root):
+        if is_ignored_path(path, root):
             continue
         relative = path.relative_to(root).as_posix()
         if relative == "MANIFEST.sha256" or "__pycache__" in path.parts:
@@ -161,8 +161,8 @@ def verify_inventory(root: Path) -> None:
         "paper_records/reddit_execution_record.json",
         "paper_records/README.md",
         "figures/figure_1/plot_validation_trajectory.py",
-        "figures/figure_2/plot_dominance_performance.py",
-        "figures/figure_3/plot_protocol_parameters.py",
+        "figures/figure_2/plot_protocol_parameters.py",
+        "figures/figure_3/plot_dominance_performance.py",
         "figures/figure_4/plot_reddit_replication.py",
         "figures/appendix_conflicts/plot_pcgrad_conflicts.py",
         "figures/figure_1/figure_1_reference.pdf",
@@ -179,7 +179,7 @@ def verify_inventory(root: Path) -> None:
     for relative in required:
         assert (root / relative).is_file(), relative
     for path in root.rglob("*"):
-        if is_generated_output(path, root):
+        if is_ignored_path(path, root):
             continue
         if path.is_file():
             if "__pycache__" in path.parts:

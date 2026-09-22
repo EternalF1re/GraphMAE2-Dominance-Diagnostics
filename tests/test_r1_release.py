@@ -78,8 +78,34 @@ class ManifestTests(unittest.TestCase):
             )
             self.assertEqual(VERIFY.scan_text_and_paths(root), [])
 
+    def test_git_metadata_is_ignored_in_a_real_checkout(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            copied = Path(directory) / ROOT.name
+            shutil.copytree(
+                ROOT,
+                copied,
+                ignore=shutil.ignore_patterns(".git", "__pycache__", "reproduced"),
+            )
+            entries = VERIFY.expected_manifest(copied)
+            (copied / "MANIFEST.sha256").write_text(
+                "".join(f"{digest}  {relative}\n" for relative, digest in sorted(entries.items())),
+                encoding="utf-8",
+            )
+            metadata = copied / ".git" / "objects" / "sentinel"
+            metadata.parent.mkdir(parents=True)
+            metadata.write_text("not release content", encoding="utf-8")
+            VERIFY.verify_release(copied)
+
 
 class FigureIsolationTests(unittest.TestCase):
+    def test_paper_figure_number_mapping(self) -> None:
+        figure_2 = ROOT / "figures" / "figure_2"
+        figure_3 = ROOT / "figures" / "figure_3"
+        self.assertTrue((figure_2 / "plot_protocol_parameters.py").is_file())
+        self.assertTrue((figure_2 / "figure_2_reference.pdf").is_file())
+        self.assertTrue((figure_3 / "plot_dominance_performance.py").is_file())
+        self.assertTrue((figure_3 / "figure_3_reference.pdf").is_file())
+
     def test_figure_rerun_does_not_modify_reference_pdf(self) -> None:
         source = ROOT / "figures" / "figure_1"
         with tempfile.TemporaryDirectory() as directory:

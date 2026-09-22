@@ -1,4 +1,4 @@
-"""Reproduce Figure 2 from the released dominance-performance records."""
+"""Reproduce Figure 3 from the released dominance-performance records."""
 
 from __future__ import annotations
 
@@ -20,7 +20,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--arxiv", type=Path, default=Path(__file__).with_name("input") / "dominance_performance.csv")
     parser.add_argument("--cross-dataset", type=Path, default=Path(__file__).with_name("input") / "cross_dataset_dominance.csv")
-    parser.add_argument("--output", type=Path, default=Path(__file__).with_name("reproduced") / "figure_2.pdf")
+    parser.add_argument("--output", type=Path, default=Path(__file__).with_name("reproduced") / "figure_3.pdf")
     args = parser.parse_args()
     import matplotlib.pyplot as plt
     from matplotlib.lines import Line2D

@@ -1,4 +1,4 @@
-"""Reproduce Figure 3 from the released gamma/remasking response record."""
+"""Reproduce Figure 2 from the released gamma/remasking response record."""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ from pathlib import Path
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", type=Path, default=Path(__file__).with_name("input") / "protocol_parameter_response.csv")
-    parser.add_argument("--output", type=Path, default=Path(__file__).with_name("reproduced") / "figure_3.pdf")
+    parser.add_argument("--output", type=Path, default=Path(__file__).with_name("reproduced") / "figure_2.pdf")
     args = parser.parse_args()
     import matplotlib.pyplot as plt
 

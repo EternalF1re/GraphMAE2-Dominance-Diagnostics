@@ -85,8 +85,8 @@ python code/diagnostics/bootstrap_reference_interval.py \
   --output reproduced/reddit_reference.json
 python tables/generate_summary_tables.py
 python figures/figure_1/plot_validation_trajectory.py
-python figures/figure_2/plot_dominance_performance.py
-python figures/figure_3/plot_protocol_parameters.py
+python figures/figure_2/plot_protocol_parameters.py
+python figures/figure_3/plot_dominance_performance.py
 python figures/figure_4/plot_reddit_replication.py
 python figures/appendix_conflicts/plot_pcgrad_conflicts.py
 ```
