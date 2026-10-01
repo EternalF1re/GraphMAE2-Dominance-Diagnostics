@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import argparse
 import subprocess
 import sys
 from pathlib import Path
@@ -15,11 +16,12 @@ PUBLIC_CLIS = (
     "code/diagnostics/sampling.py",
     "code/comparisons/summarize_weighting_methods.py",
     "figures/figure_1/plot_validation_trajectory.py",
-    "figures/figure_2/plot_protocol_parameters.py",
+    "figures/figure_2/plot_reddit_replication.py",
     "figures/figure_3/plot_dominance_performance.py",
-    "figures/figure_4/plot_reddit_replication.py",
+    "figures/figure_4/plot_protocol_parameters.py",
     "figures/appendix_conflicts/plot_pcgrad_conflicts.py",
     "tables/generate_summary_tables.py",
+    "tables/assemble_current_method_record.py",
     "tests/generate_manifest.py",
     "tests/build_release_zip.py",
     "tests/verify_release.py",
@@ -27,8 +29,12 @@ PUBLIC_CLIS = (
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--analysis-only", action="store_true", help="skip GraphMAE2 commands requiring DGL/OGB")
+    args = parser.parse_args()
+    selected = PUBLIC_CLIS[2:] if args.analysis_only else PUBLIC_CLIS
     failures = []
-    for relative in PUBLIC_CLIS:
+    for relative in selected:
         command = [sys.executable, str(ROOT / relative), "--help"]
         completed = subprocess.run(
             command,
@@ -50,7 +56,7 @@ def main() -> None:
             failures.append(relative)
     if failures:
         raise SystemExit(f"public CLI audit failed: {', '.join(failures)}")
-    print(f"public CLI audit: PASS ({len(PUBLIC_CLIS)} commands)")
+    print(f"public CLI audit: PASS ({len(selected)} commands)")
 
 
 if __name__ == "__main__":

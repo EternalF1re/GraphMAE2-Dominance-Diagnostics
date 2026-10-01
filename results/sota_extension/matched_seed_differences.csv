@@ -1,0 +1,15 @@
+new_method,comparator,seed0_diff_pp,seed1_diff_pp,seed2_diff_pp,mean_diff_pp,comparison_type,notes
+ALIGNED_MTL,Original lambda=10,0.5724841857278062,0.32526893399167367,0.17609862706823298,0.357950582262571,descriptive_matched_seed,seven fixed update coordinates; validation only; no significance claim
+ALIGNED_MTL,Ours lambda=0.3,-0.13810931912953128,-0.30638344605873336,-0.23841558452903922,-0.22763611657243463,descriptive_matched_seed,seven fixed update coordinates; validation only; no significance claim
+ALIGNED_MTL,Equal lambda=1,-0.20386657686377596,-0.3334645243688539,-0.42510942880473745,-0.3208135100124558,descriptive_matched_seed,seven fixed update coordinates; validation only; no significance claim
+ALIGNED_MTL,GradNorm,-0.06940697581088173,-0.3493539397966483,-0.32824137017596344,-0.24900076192783116,descriptive_matched_seed,seven fixed update coordinates; validation only; no significance claim
+ALIGNED_MTL,Uncertainty Weighting,-0.14327831238138966,-0.1762809644008989,-0.19880833665841813,-0.17278920448023558,descriptive_matched_seed,seven fixed update coordinates; validation only; no significance claim
+ALIGNED_MTL,CoV-Weighting,-0.286526707933743,-0.3321096229224274,-0.4202383882609406,-0.346291573039037,descriptive_matched_seed,seven fixed update coordinates; validation only; no significance claim
+ALIGNED_MTL,PCGrad lambda=10,0.368754631992918,0.24986569369735978,0.33450236145350365,0.31770756238126047,descriptive_matched_seed,seven fixed update coordinates; validation only; no significance claim
+FAMO,Original lambda=10,0.7016486431075664,0.5299442782243702,0.49032946673107647,0.5739741293543377,descriptive_matched_seed,seven fixed update coordinates; validation only; no significance claim
+FAMO,Ours lambda=0.3,-0.00894486174977116,-0.10170810182603685,0.07581525513380427,-0.011612569480667911,descriptive_matched_seed,seven fixed update coordinates; validation only; no significance claim
+FAMO,Equal lambda=1,-0.07470211948401584,-0.12878918013615737,-0.11087858914189397,-0.10478996292068905,descriptive_matched_seed,seven fixed update coordinates; validation only; no significance claim
+FAMO,GradNorm,0.05975748156887839,-0.1446785955639518,-0.014010530513119956,-0.03297721483606445,descriptive_matched_seed,seven fixed update coordinates; validation only; no significance claim
+FAMO,Uncertainty Weighting,-0.014113855001629538,0.0283943798317976,0.11542250300442536,0.04323434261153114,descriptive_matched_seed,seven fixed update coordinates; validation only; no significance claim
+FAMO,CoV-Weighting,-0.1573622505539829,-0.1274342786897309,-0.10600754859809713,-0.1302680259472703,descriptive_matched_seed,seven fixed update coordinates; validation only; no significance claim
+FAMO,PCGrad lambda=10,0.49791908937267815,0.4545410379300563,0.6487332011163471,0.5337311094730272,descriptive_matched_seed,seven fixed update coordinates; validation only; no significance claim

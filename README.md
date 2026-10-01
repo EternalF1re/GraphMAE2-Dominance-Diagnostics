@@ -33,6 +33,7 @@ obtained by the user. None of the analysis-only commands below trains a model.
 - `protocols/`: measurement and decision rules with provenance boundaries.
 - `environment/`: analysis, GraphMAE2, and optional dependency declarations.
 - `tests/`: release verification, packaging, CLI audit, and regression tests.
+- `historical_release/`: unchanged prior sync report and manifest, retained for provenance only.
 
 ## Basic release verification
 
@@ -50,19 +51,19 @@ official release.
 
 ## Full release regression suite
 
-The full suite additionally launches every public GraphMAE2 CLI with `--help`.
-It therefore requires both the analysis dependencies and the GraphMAE2 runtime
-dependencies, including DGL and OGB:
+Run the unittest suite, then the separate full public CLI `--help` audit.
+The latter requires GraphMAE2 runtime dependencies, including DGL and OGB:
 
 ```bash
 python -m pip install -r environment/requirements-analysis.txt
 python -m pip install -r environment/requirements-graphmae2.txt
 python -m unittest tests.test_r1_release -v
+python tests/audit_public_clis.py
 ```
 
-The full suite still performs no training, inference, dataset download, or
-checkpoint loading. Installing only the analysis requirements is not sufficient
-for all GraphMAE2 CLI checks.
+These commands perform no training, inference, dataset download, or checkpoint
+loading. The unittest suite tests analysis CLIs and conditionally checks PyYAML;
+the separate full CLI audit checks GraphMAE2 imports.
 
 ## Analysis-only reproduction
 
@@ -85,9 +86,9 @@ python code/diagnostics/bootstrap_reference_interval.py \
   --output reproduced/reddit_reference.json
 python tables/generate_summary_tables.py
 python figures/figure_1/plot_validation_trajectory.py
-python figures/figure_2/plot_protocol_parameters.py
+python figures/figure_2/plot_reddit_replication.py
 python figures/figure_3/plot_dominance_performance.py
-python figures/figure_4/plot_reddit_replication.py
+python figures/figure_4/plot_protocol_parameters.py
 python figures/appendix_conflicts/plot_pcgrad_conflicts.py
 ```
 
@@ -98,9 +99,18 @@ claims are verified instead.
 
 ## Recent baseline extension
 
-This release includes additional comparisons with recent multi-objective optimization methods, including Aligned-MTL and FAMO. The extension evaluates additional optimization strategies under the same GraphMAE2 pretraining protocol. The completed comparisons report validation trajectories and direct target-representation diagnostics; the attempted Nash-MTL comparator is documented as incomplete, not ranked.
+The current release includes completed comparisons with Aligned-MTL (CVPR 2023) and FAMO (NeurIPS 2023) under the common GraphMAE2 protocol. The completed comparisons report validation trajectories and direct target-representation diagnostics. Nash-MTL was attempted but not retained as a completed comparator under the adopted preregistered integration configuration.
 
-See `experiments/sota_extension/SOTA_BASELINE_PROVENANCE.md` for author-code attribution and `experiments/sota_extension/SOTA_BASELINE_PROTOCOL.md` for the fixed comparison. Compact, path-free evidence is under `results/sota_extension/`. The public package supports processed-record analysis of this extension, not an exact restart of its historical training runs; private schedules, checkpoint tensors, and the full historical SOTA adapter are not included.
+See `experiments/sota_extension/SOTA_BASELINE_PROVENANCE.md` for author-code attribution, the public preregistration and subsequent adjudication in that directory, and `code/sota_extension/` for the formal method integration core. Compact, path-free evidence is under `results/sota_extension/`. The public adapter is derived from the frozen formal implementation but is not a one-command replay of the private historical schedule. No checkpoint tensors or private schedules are included.
+
+`processed_records/method_comparisons/weighting_methods.csv` and `tables/generated/weighting_method_summary.csv` are the pre-extension historical seven-method comparison. The current nine-method Table 2 is `processed_records/method_comparisons/weighting_methods_current.csv` and `tables/generated/weighting_method_summary_current.csv`. Regenerate the current record and both summaries with:
+
+```bash
+python tables/assemble_current_method_record.py
+python tables/generate_summary_tables.py
+```
+
+The paper figure mapping is Figure 1: Arxiv validation trajectory; Figure 2: Reddit coefficient response; Figure 3: dominance-performance relationship; Figure 4: gamma/remasking sensitivity. See `FIGURE_NUMBERING_AUDIT.md`.
 
 ## Measurement provenance
 

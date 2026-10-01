@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import math
 import statistics
 from pathlib import Path
 
@@ -42,6 +43,19 @@ def method_table(root: Path) -> list[dict[str, object]]:
     return sorted(output, key=lambda row: float(row["validation_auc_mean"]), reverse=True)
 
 
+def current_method_table(root: Path) -> list[dict[str, object]]:
+    rows = read_csv(root / "processed_records/method_comparisons/weighting_methods_current.csv")
+    if len(rows) != 9 or len({row["method"] for row in rows}) != 9:
+        raise ValueError("current comparison requires nine distinct completed methods")
+    for row in rows:
+        values = [float(row[f"seed{seed}_auc"]) for seed in range(3)]
+        if not math.isclose(float(row["validation_auc_mean"]), statistics.mean(values), abs_tol=1e-14):
+            raise ValueError(f"mean AUC mismatch: {row['method']}")
+        if not math.isclose(float(row["validation_auc_sample_sd"]), statistics.stdev(values), abs_tol=1e-14):
+            raise ValueError(f"sample SD mismatch: {row['method']}")
+    return sorted(rows, key=lambda row: float(row["validation_auc_mean"]), reverse=True)
+
+
 def sampling_table(root: Path) -> list[dict[str, object]]:
     payload = json.loads((root / "processed_records/sampling_design.json").read_text(encoding="utf-8"))
     output = []
@@ -65,6 +79,7 @@ def main() -> None:
     parser.add_argument("--output-dir", type=Path, default=Path(__file__).with_name("generated"))
     args = parser.parse_args()
     write_csv(args.output_dir / "weighting_method_summary.csv", method_table(root))
+    write_csv(args.output_dir / "weighting_method_summary_current.csv", current_method_table(root))
     write_csv(args.output_dir / "sampling_design_summary.csv", sampling_table(root))
 
 

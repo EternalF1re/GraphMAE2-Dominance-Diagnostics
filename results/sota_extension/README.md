@@ -6,4 +6,4 @@
 
 The AUC values were transcribed from the frozen matched-seed adjudication. The checkpoint validation rows retain the mean and standard deviation from each frozen three-probe result after omitting private checkpoint and temporary-embedding paths; their seven-point AUCs were independently checked against the frozen per-seed values. Per-method R-hat tables are row-preserving subsets of the complete frozen C.6 table. The C.6 files and ten-method overhead CSV are byte-identical copies of their frozen counterparts. No model evaluation, training, or new bootstrap was performed to prepare these records.
 
-The full historical checkpoints, schedules, and training adapter are not part of this compact public release. Do not interpret the incomplete Nash attempt as a completed comparator or a general result about the author implementation.
+The full historical checkpoints, schedules and runner are not part of this compact public release. The method integration core is in `code/sota_extension/`, without the historical private execution schedule. Do not interpret the incomplete Nash attempt as a completed comparator or a general result about the author implementation.

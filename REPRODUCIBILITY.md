@@ -13,9 +13,9 @@ is outside the zero-data analysis workflow.
 | Item | Script | Canonical input | Frozen artifact | Default rerun output |
 |---|---|---|---|---|
 | Figure 1 | `figures/figure_1/plot_validation_trajectory.py` | `processed_records/arxiv/validation_trajectory.csv` | `figures/figure_1/figure_1_reference.pdf` | `figures/figure_1/reproduced/figure_1.pdf` |
-| Figure 2 | `figures/figure_2/plot_protocol_parameters.py` | `processed_records/arxiv/protocol_parameter_response.csv` | `figures/figure_2/figure_2_reference.pdf` | `figures/figure_2/reproduced/figure_2.pdf` |
+| Figure 2 | `figures/figure_2/plot_reddit_replication.py` | `processed_records/reddit/replication.csv` | `figures/figure_2/figure_2_reference.pdf` | `figures/figure_2/reproduced/figure_2.pdf` |
 | Figure 3 | `figures/figure_3/plot_dominance_performance.py` | Arxiv response and cross-dataset records | `figures/figure_3/figure_3_reference.pdf` | `figures/figure_3/reproduced/figure_3.pdf` |
-| Figure 4 | `figures/figure_4/plot_reddit_replication.py` | `processed_records/reddit/replication.csv` | `figures/figure_4/figure_4_reference.pdf` | `figures/figure_4/reproduced/figure_4.pdf` |
+| Figure 4 | `figures/figure_4/plot_protocol_parameters.py` | `processed_records/arxiv/protocol_parameter_response.csv` | `figures/figure_4/figure_4_reference.pdf` | `figures/figure_4/reproduced/figure_4.pdf` |
 | Appendix conflicts | `figures/appendix_conflicts/plot_pcgrad_conflicts.py` | PCGrad histogram bins | `figures/appendix_conflicts/appendix_conflicts_reference.pdf` | `figures/appendix_conflicts/reproduced/appendix_conflicts.pdf` |
 
 Rerun directories are excluded from `MANIFEST.sha256` and release ZIPs. The
@@ -26,7 +26,8 @@ binary equality across plotting backends.
 
 `tables/generate_summary_tables.py` deterministically creates:
 
-- `weighting_method_summary.csv` from the released per-seed method record; and
+- `weighting_method_summary.csv` from the historical seven-method record;
+- `weighting_method_summary_current.csv` from the current nine-method record; and
 - `sampling_design_summary.csv` from the released sampling description.
 
 ## Finalized reference estimator
@@ -59,6 +60,8 @@ reference. The finalized values are:
 
 Method attribution and the fixed protocol are in `experiments/sota_extension/`. The extension's public processed records permit comparison and arithmetic checks, not replay of the original training jobs. The full historical SOTA training adapter and private schedules are not in this package; a blanket assertion of end-to-end reproduction for this extension would be inaccurate.
 
+The public method integration core in `code/sota_extension/` preserves the frozen Aligned-MTL/FAMO method functions, but excludes the private historical schedule and runner. It is not a one-command recreation of the formal jobs. Current Table 2 is `processed_records/method_comparisons/weighting_methods_current.csv` and `tables/generated/weighting_method_summary_current.csv`; use `python tables/assemble_current_method_record.py` followed by `python tables/generate_summary_tables.py`. Historical seven-method records remain untouched. Appendix C.6 maps to `results/sota_extension/direct_rhat/C6_checkpoint_level_rhat.csv` and `C6_summary.json`. Appendix E maps to per-seed AUC, matched differences and overhead records. Appendix B maps to public preregistration, post-result hypothesis adjudication and the incomplete Nash attempt.
+
 ## Other frozen checks
 
 - PCGrad histogram: 25,596 updates, including 9,417 conflicts.
@@ -88,15 +91,16 @@ The attributed GraphMAE2 core additionally imports PyTorch, DGL, OGB, PyYAML,
 scikit-learn, SciPy, psutil, tqdm, and tensorboardX. Weights & Biases logging and
 `localgraphclustering` preprocessing are optional. Basic release verification
 and processed-record analysis do not need the full GraphMAE2 dependency stack.
-The complete regression suite runs GraphMAE2 CLI `--help` commands and therefore
-does require DGL, OGB, and the other declared GraphMAE2 runtime dependencies.
+The separate full CLI audit runs GraphMAE2 `--help` commands and therefore
+requires DGL, OGB, and the declared runtime dependencies.
 
 ## Release integrity
 
 For an official extracted ZIP, basic verification is
 `python tests/verify_release.py`; it does not require DGL or OGB. The full
-regression command `python -m unittest tests.test_r1_release -v` additionally
-requires both dependency groups because it audits public GraphMAE2 CLI help.
+GraphMAE2 CLI audit `python tests/audit_public_clis.py` additionally requires
+both dependency groups. The unittest suite checks analysis CLIs and conditionally
+checks PyYAML-dependent configuration behavior.
 The frozen manifest detects missing, additional, and modified tracked files.
 `tests/generate_manifest.py` is a maintainer-only assembly command and must not
 precede official-release verification.

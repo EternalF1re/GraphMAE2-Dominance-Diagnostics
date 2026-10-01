@@ -7,7 +7,7 @@ import hashlib
 from pathlib import Path
 
 
-EXCLUDED_PARTS = {"__pycache__", "reproduced"}
+EXCLUDED_PARTS = {".git", "__pycache__", "reproduced"}
 
 
 def digest(path: Path) -> str:

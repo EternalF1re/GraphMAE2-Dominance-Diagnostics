@@ -1,0 +1,20 @@
+# Frozen hypothesis adjudication
+
+Source of hypothesis wording: `SOTA_BASELINE_PREREGISTRATION.md`, section "Hypotheses and reporting discipline".
+There is **no frozen 0.2 percentage-point threshold** in that source. This
+audit does not add one. AUCs below are normalized seven-checkpoint
+validation-trajectory AUCs over fixed updates 250 to 8,532, recomputed from
+three matched pretraining seeds. Differences are descriptive, not p-values.
+
+| Hypothesis ID | Frozen hypothesis text | Frozen evaluation scope | Frozen numeric criterion | Observed result | Adjudication | Rationale | Evidence |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| H1: FAMO | "Under matched seeds, Aligned-MTL, Nash-MTL, and FAMO validation-trajectory AUCs may lie near the existing higher-performing weighting methods. No particular new method is assumed better or worse than candidate lambda=0.3." | Three matched seeds, seven validation checkpoints | None | FAMO 0.710281; Ours 0.710397; GradNorm 0.710611; Equal 0.711329; CoV 0.711583 | SUPPORTED | FAMO is descriptively near the named higher-performing group, including -0.0116 pp versus Ours; no artificial hard cutoff is applied. | `results/sota_extension/famo/per_seed_auc.csv`; `results/sota_extension/matched_seed_differences.csv`; released checkpoint validation rows |
+| H1: Aligned-MTL | Same H1 text above | Same | None | Aligned-MTL 0.708121; -0.2276 pp vs Ours, -0.3208 vs Equal, -0.3463 vs CoV | NOT_SUPPORTED | Aligned-MTL occupies an intermediate performance level, rather than the original narrow high-performing cluster. This is a descriptive interpretation, not a newly frozen threshold. | `results/sota_extension/aligned_mtl/per_seed_auc.csv`; `results/sota_extension/matched_seed_differences.csv` |
+| H1: Nash-MTL | Same H1 text above | Same | None | Frozen formal runs stopped after 707, 629, and 8 completed updates; no seven-checkpoint AUC | NOT_EVALUABLE | An incomplete trajectory cannot satisfy the frozen AUC calculation. The observed exception is integration-specific and cannot be turned into a Nash performance result. | `results/sota_extension/nash_failure/failure_provenance.csv`; `NASH_FAILURE_README.md` |
+| H2 | "Similar downstream performance need not imply equal directly measured representation-level dominance; different weighting mechanisms may have different realized ratios." | Validation-trajectory AUC and direct target-representation diagnostic | None | FAMO and Ours differ by -0.0116 pp in mean AUC; FAMO checkpoint median R-hat range 7.6734-18.1768, while Ours previously measured 0.7510-2.3321 | SUPPORTED | This is descriptive cross-method evidence, not causal identification or a claim that every diagnostic batch has an identical protocol. Aligned-MTL's pre-transformation ratio cannot be interpreted as its actual transformed update ratio. | `results/sota_extension/direct_rhat/C6_summary.json`; `results/sota_extension/matched_seed_differences.csv`; historical released comparison records |
+| H3 | "At least some dynamic SOTA methods may incur additional training computation compared with Equal lambda=1, without prespecifying magnitude." | Controlled same-GPU 50-warmup/300-measured-step benchmark | 50 warm-up and 300 measured steps; no effect-size threshold | Equal 220.82 ms/step; Aligned 266.93, FAMO 298.03, frozen Nash 346.38; all 300 measured steps on GPU0 | SUPPORTED | At least some dynamic SOTA methods cost more per measured optimizer step under the frozen same-schedule window. This is single-seed descriptive resource evidence, not a full-run timing forecast or formal Nash AUC. | `results/sota_extension/overhead/OVERHEAD_SUMMARY.csv`; `OVERHEAD_BENCHMARK_PROTOCOL.md` |
+
+These judgments were made after the formal results under the frozen hypothesis wording; the hypothesis was not rewritten. The final summary must preserve the H1 method-specific outcomes. H1 was
+phrased as a possibility, so these labels are descriptive adjudications of
+the observed cluster claim, not formal rejection tests. Nash remains excluded
+from complete-method ranking. No test-set data were used in this table.

@@ -35,6 +35,8 @@ def sensitive_patterns() -> list[tuple[str, re.Pattern[str]]]:
         ("linux home path", re.compile("/ho" + "me/", re.I)),
         ("mounted drive path", re.compile("/m" + "nt/", re.I)),
         ("Windows absolute path", re.compile(r"\b[A-Za-z]:[\\/]")),
+        ("network address", re.compile(r"\b(?:\d{1,3}\.){3}\d{1,3}\b")),
+        ("UNC path", re.compile(r"\\\\[A-Za-z0-9_.-]+\\")),
         ("private username", re.compile("su" + "jingze", re.I)),
         ("internal numbered phase", re.compile("ph" + r"ase\s*\d", re.I)),
         ("internal numbered gate", re.compile("ga" + r"te\s*\d", re.I)),
@@ -50,6 +52,7 @@ def sensitive_patterns() -> list[tuple[str, re.Pattern[str]]]:
         ),
         ("API secret", re.compile(r"(?:api[_-]?key|token|password)\s*[:=]\s*['\"][^'\"]+", re.I)),
         ("secret key prefix", re.compile(r"\bsk-[A-Za-z0-9]{16,}")),
+        ("private checkpoint filename", re.compile(r"\bseed\d+[^\s/\\]*\.pt\b", re.I)),
     ]
 
 
@@ -69,6 +72,7 @@ def scan_text_and_paths(root: Path) -> list[str]:
             not path.is_file()
             or path.suffix.lower() not in TEXT_SUFFIXES
             or path.suffix.lower() == ".sha256"
+            or relative == "SOTA_REPOSITORY_SYNC_R1_MANIFEST.csv"
         ):
             continue
         text = path.read_text(encoding="utf-8-sig", errors="replace")
@@ -118,14 +122,56 @@ def verify_records(root: Path) -> None:
 
     figure_inputs = {
         "figures/figure_1/input/validation_trajectory.csv": "processed_records/arxiv/validation_trajectory.csv",
-        "figures/figure_2/input/protocol_parameter_response.csv": "processed_records/arxiv/protocol_parameter_response.csv",
+        "figures/figure_2/input/replication.csv": "processed_records/reddit/replication.csv",
         "figures/figure_3/input/dominance_performance.csv": "processed_records/arxiv/dominance_performance.csv",
         "figures/figure_3/input/cross_dataset_dominance.csv": "processed_records/method_comparisons/cross_dataset_dominance.csv",
-        "figures/figure_4/input/replication.csv": "processed_records/reddit/replication.csv",
+        "figures/figure_4/input/protocol_parameter_response.csv": "processed_records/arxiv/protocol_parameter_response.csv",
         "figures/appendix_conflicts/input/pcgrad_conflict_histogram.csv": "processed_records/method_comparisons/pcgrad_conflict_histogram.csv",
     }
     for figure_input, canonical_record in figure_inputs.items():
         assert (root / figure_input).read_bytes() == (root / canonical_record).read_bytes()
+
+    current = {row["method"]: row for row in read_csv(
+        root / "processed_records/method_comparisons/weighting_methods_current.csv"
+    )}
+    assert len(current) == 9 and "Nash-MTL" not in current
+    for method, expected in {
+        "Aligned-MTL": (0.7088306600965042, 0.7076088871885865, 0.7079225404916313, 0.708120695925574),
+        "FAMO": (0.7101223046703018, 0.7096556406309135, 0.7110648488882597, 0.7102809313964916),
+    }.items():
+        actual = tuple(float(current[method][f"seed{seed}_auc"]) for seed in range(3)) + (
+            float(current[method]["validation_auc_mean"]),
+        )
+        assert all(math.isclose(a, b, rel_tol=0.0, abs_tol=1e-14) for a, b in zip(actual, expected))
+    c6 = json.loads((root / "results/sota_extension/direct_rhat/C6_summary.json").read_text(encoding="utf-8"))
+    for method, expected in {
+        "ALIGNED_MTL": (1.6412577550413194, 3.2462087775098794, 6.556030369459918),
+        "FAMO": (7.673443326731212, 12.720716872649374, 18.17678358003929),
+    }.items():
+        actual = tuple(float(c6[method][key]) for key in ("min", "median", "max"))
+        assert all(math.isclose(a, b, rel_tol=0.0, abs_tol=1e-12) for a, b in zip(actual, expected))
+    assert c6["ALIGNED_MTL"]["semantics"] == "pre-transformation representation-level dominance"
+    relative = [float(row["effective_relative_weight"]) for row in read_csv(
+        root / "results/sota_extension/direct_rhat/C6_checkpoint_level_rhat.csv"
+    ) if row["method"] == "FAMO"]
+    assert math.isclose(min(relative), 2.112417, abs_tol=1e-6)
+    assert math.isclose(max(relative), 4.156239, abs_tol=1e-6)
+
+
+def verify_sync_manifest(root: Path) -> None:
+    path = root / "SOTA_REPOSITORY_SYNC_R1_MANIFEST.csv"
+    assert path.is_file()
+    rows = read_csv(path)
+    excluded = {"MANIFEST.sha256", path.name}
+    expected = {item.relative_to(root).as_posix(): item for item in root.rglob("*")
+                if item.is_file() and ".git" not in item.parts and "__pycache__" not in item.parts
+                and "reproduced" not in item.parts and item.relative_to(root).as_posix() not in excluded}
+    assert {row["relative_path"] for row in rows} == set(expected)
+    for row in rows:
+        item = expected[row["relative_path"]]
+        assert int(row["size_bytes"]) == item.stat().st_size
+        assert row["sha256"] == hashlib.sha256(item.read_bytes()).hexdigest()
+        assert row["category"] and row["source_provenance"]
 
 
 def expected_manifest(root: Path) -> dict[str, str]:
@@ -161,15 +207,24 @@ def verify_inventory(root: Path) -> None:
         "paper_records/reddit_execution_record.json",
         "paper_records/README.md",
         "figures/figure_1/plot_validation_trajectory.py",
-        "figures/figure_2/plot_protocol_parameters.py",
+        "figures/figure_2/plot_reddit_replication.py",
         "figures/figure_3/plot_dominance_performance.py",
-        "figures/figure_4/plot_reddit_replication.py",
+        "figures/figure_4/plot_protocol_parameters.py",
         "figures/appendix_conflicts/plot_pcgrad_conflicts.py",
         "figures/figure_1/figure_1_reference.pdf",
         "figures/figure_2/figure_2_reference.pdf",
         "figures/figure_3/figure_3_reference.pdf",
         "figures/figure_4/figure_4_reference.pdf",
         "figures/appendix_conflicts/appendix_conflicts_reference.pdf",
+        "FIGURE_NUMBERING_AUDIT.md",
+        "code/sota_extension/sota_baseline_extension.py",
+        "code/sota_extension/direct_rhat.py",
+        "experiments/sota_extension/SOTA_BASELINE_PREREGISTRATION.md",
+        "experiments/sota_extension/PREREGISTERED_HYPOTHESIS_ADJUDICATION.md",
+        "processed_records/method_comparisons/weighting_methods_current.csv",
+        "tables/generated/weighting_method_summary_current.csv",
+        "results/sota_extension/overhead/OVERHEAD_COMPLETED_METHODS.csv",
+        "SOTA_REPOSITORY_SYNC_R1_MANIFEST.csv",
         "tables/generate_summary_tables.py", "protocols/measurement_rules.md",
         "tables/generated/weighting_method_summary.csv",
         "tables/generated/sampling_design_summary.csv",
@@ -207,6 +262,7 @@ def verify_release(root: Path, skip_manifest: bool = False) -> None:
     verify_records(root)
     findings = scan_text_and_paths(root)
     assert not findings, "\n".join(findings)
+    verify_sync_manifest(root)
     if not skip_manifest:
         verify_manifest(root)
 

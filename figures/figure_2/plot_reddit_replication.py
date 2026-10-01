@@ -1,4 +1,4 @@
-"""Reproduce Figure 4 from the released Reddit validation records."""
+"""Reproduce Figure 2 from the released Reddit validation records."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ from pathlib import Path
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", type=Path, default=Path(__file__).with_name("input") / "replication.csv")
-    parser.add_argument("--output", type=Path, default=Path(__file__).with_name("reproduced") / "figure_4.pdf")
+    parser.add_argument("--output", type=Path, default=Path(__file__).with_name("reproduced") / "figure_2.pdf")
     args = parser.parse_args()
     import matplotlib.pyplot as plt
 

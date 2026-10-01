@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import importlib.util
+import importlib.util
 import json
 import os
 import shutil
@@ -101,10 +102,16 @@ class FigureIsolationTests(unittest.TestCase):
     def test_paper_figure_number_mapping(self) -> None:
         figure_2 = ROOT / "figures" / "figure_2"
         figure_3 = ROOT / "figures" / "figure_3"
-        self.assertTrue((figure_2 / "plot_protocol_parameters.py").is_file())
+        self.assertTrue((figure_2 / "plot_reddit_replication.py").is_file())
         self.assertTrue((figure_2 / "figure_2_reference.pdf").is_file())
         self.assertTrue((figure_3 / "plot_dominance_performance.py").is_file())
         self.assertTrue((figure_3 / "figure_3_reference.pdf").is_file())
+        figure_4 = ROOT / "figures" / "figure_4"
+        self.assertTrue((figure_4 / "plot_protocol_parameters.py").is_file())
+        self.assertTrue((figure_4 / "figure_4_reference.pdf").is_file())
+
+    def test_figure_inputs_match_canonical_records(self) -> None:
+        VERIFY.verify_records(ROOT)
 
     def test_figure_rerun_does_not_modify_reference_pdf(self) -> None:
         source = ROOT / "figures" / "figure_1"
@@ -115,17 +122,27 @@ class FigureIsolationTests(unittest.TestCase):
             before = hashlib.sha256(reference.read_bytes()).hexdigest()
             completed = subprocess.run(
                 [sys.executable, str(copied / "plot_validation_trajectory.py")],
-                cwd=Path(directory),
-                check=False,
-                capture_output=True,
-                text=True,
+                cwd=Path(directory), check=False, capture_output=True, text=True,
             )
             self.assertEqual(completed.returncode, 0, completed.stderr)
             self.assertTrue((copied / "reproduced" / "figure_1.pdf").is_file())
             self.assertEqual(before, hashlib.sha256(reference.read_bytes()).hexdigest())
 
 
+class CurrentMethodTests(unittest.TestCase):
+    def test_current_table_reproduces_from_public_records(self) -> None:
+        assembler = load_module("current_assembler", ROOT / "tables" / "assemble_current_method_record.py")
+        generator = load_module("table_generator", ROOT / "tables" / "generate_summary_tables.py")
+        expected = generator.read_csv(ROOT / "processed_records/method_comparisons/weighting_methods_current.csv")
+        actual = assembler.assemble(ROOT)
+        self.assertEqual(len(actual), 9)
+        for left, right in zip(actual, expected):
+            self.assertEqual(left["method"], right["method"])
+            self.assertAlmostEqual(float(left["validation_auc_mean"]), float(right["validation_auc_mean"]), places=14)
+        self.assertEqual(generator.current_method_table(ROOT), expected)
+
 class ConfigProvenanceTests(unittest.TestCase):
+    @unittest.skipUnless(importlib.util.find_spec("yaml"), "PyYAML not installed in this interpreter")
     def config_module(self):
         return load_module(
             "config_paths",
@@ -193,9 +210,9 @@ class ConfigProvenanceTests(unittest.TestCase):
 
 
 class AnalysisCliTests(unittest.TestCase):
-    def test_all_public_cli_help_commands_pass(self) -> None:
+    def test_analysis_cli_help_commands_pass(self) -> None:
         completed = subprocess.run(
-            [sys.executable, str(ROOT / "tests" / "audit_public_clis.py")],
+            [sys.executable, str(ROOT / "tests" / "audit_public_clis.py"), "--analysis-only"],
             cwd=ROOT,
             check=False,
             capture_output=True,
