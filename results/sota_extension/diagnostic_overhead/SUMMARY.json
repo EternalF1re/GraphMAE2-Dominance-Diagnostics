@@ -1,0 +1,12 @@
+{
+  "status": "COMPLETE",
+  "batch_count": 32,
+  "bootstrap_resamples": 10000,
+  "gradient_extraction_seconds": 10.44726499603712,
+  "bootstrap_seconds": 0.07150125000043772,
+  "total_seconds": 10.518766246037558,
+  "model_and_checkpoint_loading_included": false,
+  "optimizer_step_executed": false,
+  "test_accessed": false,
+  "validation_accessed": false
+}

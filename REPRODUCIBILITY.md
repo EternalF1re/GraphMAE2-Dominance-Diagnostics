@@ -46,6 +46,19 @@ reference. The finalized values are:
 | ogbn-arxiv | 31.7653148904106 | [29.849883433713472, 44.0618155456329] | `processed_records/arxiv/reference_summary.csv` |
 | Reddit | 12.62592612939547 | [11.463302621964752, 14.199962981296819] | `processed_records/reddit/reference_summary.csv` |
 
+## Recent baseline extension
+
+| Item | Public processed record | Scope |
+| --- | --- | --- |
+| Aligned-MTL seed AUC and validation checkpoints | `results/sota_extension/aligned_mtl/` | Three seeds, seven validation checkpoints each |
+| FAMO seed AUC and validation checkpoints | `results/sota_extension/famo/` | Three seeds, seven validation checkpoints each |
+| Direct checkpoint dominance | `results/sota_extension/direct_rhat/` | Seed-by-checkpoint median of three diagnostic rows; method semantics in README |
+| Nash-MTL attempt | `results/sota_extension/nash_failure/` | Failure provenance only; no completed AUC |
+| Online training overhead | `results/sota_extension/overhead/` | 50 warm-up plus 300 measured optimizer steps |
+| Offline diagnostic overhead | `results/sota_extension/diagnostic_overhead/` | 32 gradient batches plus 10,000 CPU bootstrap resamples |
+
+Method attribution and the fixed protocol are in `experiments/sota_extension/`. The extension's public processed records permit comparison and arithmetic checks, not replay of the original training jobs. The full historical SOTA training adapter and private schedules are not in this package; a blanket assertion of end-to-end reproduction for this extension would be inaccurate.
+
 ## Other frozen checks
 
 - PCGrad histogram: 25,596 updates, including 9,417 conflicts.

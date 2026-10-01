@@ -1,0 +1,24 @@
+{
+  "ALIGNED_MTL": {
+    "n_raw_records": 63,
+    "n_checkpoint_values": 21,
+    "min": 1.6412577550413194,
+    "max": 6.556030369459918,
+    "median": 3.2462087775098794,
+    "pooled_raw_min": 1.3044872070820372,
+    "pooled_raw_max": 6.953480904057547,
+    "pooled_raw_median": 3.4773033164395093,
+    "semantics": "pre-transformation representation-level dominance"
+  },
+  "FAMO": {
+    "n_raw_records": 63,
+    "n_checkpoint_values": 21,
+    "min": 7.673443326731212,
+    "max": 18.17678358003929,
+    "median": 12.720716872649374,
+    "pooled_raw_min": 4.673711255872207,
+    "pooled_raw_max": 22.12743911998016,
+    "pooled_raw_median": 11.011047373113344,
+    "semantics": "realized-weight representation-level dominance"
+  }
+}

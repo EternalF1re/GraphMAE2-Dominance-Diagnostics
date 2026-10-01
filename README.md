@@ -96,6 +96,12 @@ overwrite the manifest-tracked `*_reference.pdf` files. PDF binary identity is
 not treated as a scientific requirement; canonical CSV values and key numeric
 claims are verified instead.
 
+## Recent baseline extension
+
+This release includes additional comparisons with recent multi-objective optimization methods, including Aligned-MTL and FAMO. The extension evaluates additional optimization strategies under the same GraphMAE2 pretraining protocol. The completed comparisons report validation trajectories and direct target-representation diagnostics; the attempted Nash-MTL comparator is documented as incomplete, not ranked.
+
+See `experiments/sota_extension/SOTA_BASELINE_PROVENANCE.md` for author-code attribution and `experiments/sota_extension/SOTA_BASELINE_PROTOCOL.md` for the fixed comparison. Compact, path-free evidence is under `results/sota_extension/`. The public package supports processed-record analysis of this extension, not an exact restart of its historical training runs; private schedules, checkpoint tensors, and the full historical SOTA adapter are not included.
+
 ## Measurement provenance
 
 The earlier compact diagnostic and the later finalized diagnostic are related

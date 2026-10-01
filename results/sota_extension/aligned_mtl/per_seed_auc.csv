@@ -1,0 +1,4 @@
+method,pretraining_seed,normalized_validation_trajectory_auc
+ALIGNED_MTL,0,0.7088306600965042
+ALIGNED_MTL,1,0.7076088871885865
+ALIGNED_MTL,2,0.7079225404916313

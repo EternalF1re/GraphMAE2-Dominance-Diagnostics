@@ -1,0 +1,4 @@
+method,pretraining_seed,requested_updates,completed_updates,error_type,error_summary,formal_comparator_complete,test_accessed
+NASH_MTL,0,8532,707,RuntimeError,Nash-MTL previous alpha has nonpositive Gram product,False,False
+NASH_MTL,1,8532,629,RuntimeError,Nash-MTL previous alpha has nonpositive Gram product,False,False
+NASH_MTL,2,8532,8,RuntimeError,Nash-MTL previous alpha has nonpositive Gram product,False,False

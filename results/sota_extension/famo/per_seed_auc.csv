@@ -1,0 +1,4 @@
+method,pretraining_seed,normalized_validation_trajectory_auc
+FAMO,0,0.7101223046703018
+FAMO,1,0.7096556406309135
+FAMO,2,0.7110648488882597
