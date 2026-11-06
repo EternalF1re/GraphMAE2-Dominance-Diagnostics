@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "record_count": 120,
+  "independent_seed_count": 10,
+  "groups": {
+    "G1": {
+      "encoder_coefficient": 10,
+      "head_coefficient": 10
+    },
+    "G2": {
+      "encoder_coefficient": 0.3,
+      "head_coefficient": 10
+    }
+  },
+  "updates": [
+    250,
+    3555,
+    8532
+  ],
+  "batch_positions": [
+    93,
+    118
+  ],
+  "target_rows_per_measurement": 128,
+  "local_auxiliary_coefficient": 10,
+  "scalar_record_files": {
+    "measurements.csv": "f742a4a249b5eafeb0f7e510e13875e7d0a0c86c23216cef8adaffb6d35967b7",
+    "identities.json": "72a1f9061bb5d2cbbff9b130353fe2dc23347229ba9e5af5db08e2b0894ad6ef"
+  },
+  "source_archive_sha256": "1982d3a72c090760d43de7f41bc2e00eb44e138a872b9941909c533217e700c2",
+  "source_archive_manifest_sha256": "5a4abeb1af409e34ba926e26869980b2771bd73192a8033f632faf96bc6deee4",
+  "source_excerpts_sha256": {
+    "component_capture": "dd01b9871bf754f46b8c203584dea596e118285555089e1709e59a37b36b5291",
+    "full_z_metrics": "04013cb633a675aef21cb81218c91dd651e2a6e07a1978d60b250f9d3b916615",
+    "target_metrics": "eb0a57073e52d1151ef321f99725c70f7e7cfe7d02b02017c4004820a683ebda"
+  },
+  "scope": "Processed representation-gradient scalar records and hashes only; no model, graph, labels, Schedule payload, or gradient tensor.",
+  "source_record_hashes": "Source hashes identify original measurement records, not the reformatted public CSV rows.",
+  "attribution": "Study-authored records and analysis: LICENSE-AUTHORS. GraphMAE2 scientific context: THUDM GraphMAE2, MIT license in LICENSE."
+}

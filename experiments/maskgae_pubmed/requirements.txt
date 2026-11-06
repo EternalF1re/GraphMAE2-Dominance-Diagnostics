@@ -1,0 +1,2 @@
+# CPU scalar analysis only; tested with Python 3.13.7.
+scipy==1.16.2

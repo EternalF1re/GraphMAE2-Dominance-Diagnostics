@@ -1,7 +1,7 @@
 # GraphMAE2 Dominance Diagnostics
 
 This repository accompanies a study of loss-component dominance and weighting
-in GraphMAE2. It publishes compact processed records, deterministic analysis
+in GraphMAE2 and MaskGAE. It publishes compact processed records, deterministic analysis
 utilities, paper-figure scripts, and an attributed subset of the GraphMAE2
 implementation for inspection.
 
@@ -12,7 +12,7 @@ The package supports **analysis-level reproduction from processed records**:
 - rechecking the authoritative Arxiv and Reddit reference estimates;
 - recomputing the released deterministic bootstrap intervals;
 - rebuilding summary tables;
-- redrawing the four main figures and the appendix conflict histogram; and
+- redrawing the five main figures and Appendix Figure D.1; and
 - inspecting the shared-target component-gradient implementation.
 
 The package does **not** contain graph datasets, LC artifacts, model
@@ -34,6 +34,42 @@ obtained by the user. None of the analysis-only commands below trains a model.
 - `environment/`: analysis, GraphMAE2, and optional dependency declarations.
 - `tests/`: release verification, packaging, CLI audit, and regression tests.
 - `historical_release/`: unchanged prior sync report and manifest, retained for provenance only.
+
+## Added ten-seed analyses
+
+The current manuscript additions are organized alongside the existing records:
+
+| Experiment | Processed records | Scientific implementation / protocol | Analysis |
+|---|---|---|---|
+| GraphMAE2 encoder/head factorial,80runs | `processed_records/factorial/` | `experiments/factorial/`, `code/experiments/factorial_weighting.py` | `code/analysis/factorial.py` |
+| GraphMAE2 G1/G2 gradient geometry,120measurements | `processed_records/gradient_geometry/` | `experiments/gradient_geometry/`, `code/measurements/gradient_geometry_components.py` | `code/analysis/gradient_geometry.py` |
+| MaskGAE PubMed five weights,50runs | `processed_records/maskgae_pubmed/` | `experiments/maskgae_pubmed/`, `code/measurements/maskgae_components.py` | `code/analysis/maskgae_pubmed.py` |
+| Gradient-ratio estimator reliability,ten seeds | `processed_records/estimator_reliability/` | `experiments/estimator_reliability/` | `code/analysis/estimator_reliability.py` |
+
+After installing `environment/requirements-analysis.txt`, a single CPU-only command
+recomputes the added analyses, checks manuscript claims and generates Figures1/5:
+
+```bash
+python -B reproduce_analysis.py
+python -B -m unittest discover -s tests -v
+```
+
+Use a new `--output-dir` for a second run; `--skip-figures` checks only arithmetic.
+Numerical reproducibility is distinct from byte identity: SciPy versions and
+platforms can change the last floating-point digits of statistical tables.
+The frozen reference CSVs are protected by manifests and must not be rewritten
+or re-rounded to hide differences. See the numerical reproducibility policy in
+`REPRODUCIBILITY.md`; the existing 84 claim-specific tolerances are unchanged.
+No graph downloads, model imports, training, embedding extraction, validation
+probes, GPU, or new bootstrap resampling occurs in this workflow. Stored
+bootstrap interval endpoints are verified/used as stored observations, not
+claimed as newly reproduced RNG histories. See `DATA_DICTIONARY.md`,
+`MANUSCRIPT_CLAIM_MAP.csv` and `REPRODUCIBILITY.md` for units, sources and limits.
+
+The reliability data retain an independently adjudicated terminal monitoring
+failure: numerical data are conditionally accepted, but formal execution did
+not pass. Sampling/refusal superiority and population-valid bootstrap coverage
+are not demonstrated. These limitations are part of the published evidence.
 
 ## Basic release verification
 
@@ -85,7 +121,8 @@ python code/diagnostics/bootstrap_reference_interval.py \
   --dataset reddit \
   --output reproduced/reddit_reference.json
 python tables/generate_summary_tables.py
-python figures/figure_1/plot_validation_trajectory.py
+python figures/figure_1/plot_factorial_trajectory.py
+python figures/figure_5/plot_maskgae_dose_response.py
 python figures/figure_2/plot_reddit_replication.py
 python figures/figure_3/plot_dominance_performance.py
 python figures/figure_4/plot_protocol_parameters.py
@@ -110,7 +147,13 @@ python tables/assemble_current_method_record.py
 python tables/generate_summary_tables.py
 ```
 
-The paper figure mapping is Figure 1: Arxiv validation trajectory; Figure 2: Reddit coefficient response; Figure 3: dominance-performance relationship; Figure 4: gamma/remasking sensitivity. See `FIGURE_NUMBERING_AUDIT.md`.
+The current mapping is Figure1: ten-seed GraphMAE2 factorial trajectory;
+Figure2: Reddit coefficient response; Figure3: dominance-performance relationship;
+Figure4: gamma/remasking sensitivity; Figure5: MaskGAE dose response;
+AppendixD.1: PCGrad conflict histogram. Figures2/3/4/D.1 remain unchanged.
+The superseded three-seed Figure1 is preserved under
+`figures/historical/three_seed_trajectory/`, not reused as current Figure1.
+See `FIGURE_MAP.json` and `FIGURE_NUMBERING_AUDIT.md`.
 
 ## Measurement provenance
 
@@ -170,6 +213,10 @@ python tests/verify_release.py --zip ../graphmae2-dominance-diagnostics-r2.zip
 ```
 
 The ZIP builder emits POSIX `/` member paths and excludes rerun outputs.
+For this expanded candidate, run `python tests/generate_sync_manifest.py` before
+`python tests/generate_manifest.py`; the former creates the current
+`RELEASE_CONTENT_MANIFEST.csv`. The unchanged SOTA-specific manifest in the root
+is an earlier publication snapshot, not the integrity manifest for this candidate.
 
 ## Licenses
 

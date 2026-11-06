@@ -1,0 +1,150 @@
+{
+  "dataset": "ogbn-arxiv",
+  "architecture_and_effective_runtime": {
+    "activation": "prelu",
+    "alpha_l": 6,
+    "attn_drop": 0.1,
+    "batch_size": 128,
+    "batch_size_f": 256,
+    "dataset": "ogbn-arxiv",
+    "decoder": "gat",
+    "delayed_ema_epoch": 40,
+    "drop_edge_rate": 0.5,
+    "drop_edge_rate_f": 0.0,
+    "encoder": "gat",
+    "full_graph_forward": false,
+    "in_drop": 0.2,
+    "label_rate": 1.0,
+    "lam": 10.0,
+    "linear_prob": true,
+    "load_model": false,
+    "logging": false,
+    "loss_fn": "sce",
+    "lr": 0.0025,
+    "lr_f": 0.005,
+    "mask_method": "random",
+    "mask_rate": 0.5,
+    "mask_type": "mask",
+    "max_epoch": 60,
+    "max_epoch_f": 1000,
+    "momentum": 0.996,
+    "negative_slope": 0.2,
+    "no_pretrain": false,
+    "norm": "layernorm",
+    "num_dec_layers": 1,
+    "num_features": 128,
+    "num_heads": 8,
+    "num_hidden": 1024,
+    "num_layers": 4,
+    "num_out_heads": 1,
+    "num_remasking": 3,
+    "optimizer": "adamw",
+    "remask_method": "random",
+    "remask_rate": 0.5,
+    "replace_rate": 0.0,
+    "residual": true,
+    "sampling_method": "lc",
+    "scheduler": true,
+    "use_cfg": true,
+    "warmup_steps": -1,
+    "weight_decay": 0.06,
+    "weight_decay_f": 0.0001
+  },
+  "pretraining_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "execution_epochs": 12,
+  "scheduler_horizon_epochs": 60,
+  "updates_per_epoch": 711,
+  "total_updates": 8532,
+  "training_batch_size": 128,
+  "checkpoint_updates": [
+    250,
+    711,
+    1422,
+    2133,
+    3555,
+    5688,
+    8532
+  ],
+  "groups": {
+    "G1": {
+      "E": 10.0,
+      "H": 10.0,
+      "lambda": 10.0,
+      "s": 1.0
+    },
+    "G2": {
+      "E": 0.3,
+      "H": 10.0,
+      "lambda": 10.0,
+      "s": 0.03
+    },
+    "G3": {
+      "E": 0.3,
+      "H": 0.3,
+      "lambda": 0.3,
+      "s": 1.0
+    },
+    "G4": {
+      "E": 10.0,
+      "H": 0.3,
+      "lambda": 0.3,
+      "s": 33.333333333333336
+    }
+  },
+  "clipping": {
+    "A": "native global norm clip3",
+    "B": "separate encoder,reconstruction,latent groups each norm clip3"
+  },
+  "linear_probe": {
+    "seeds": [
+      54321,
+      54322,
+      54323
+    ],
+    "epochs": 1000,
+    "batch_size": 256,
+    "lr": 0.005,
+    "weight_decay": 0.0001,
+    "optimizer": "Adam",
+    "num_workers": 0,
+    "selection": "native best validation accuracy; later epoch on tie",
+    "checkpoint_mean": "mean of the three fixed validation-only probe seeds"
+  },
+  "statistics": {
+    "option": "A_CONTINUOUS",
+    "per_seed_effects": {
+      "Delta_E": "((Y_G1-Y_G2)+(Y_G4-Y_G3))/2",
+      "Delta_H": "((Y_G1-Y_G4)+(Y_G2-Y_G3))/2",
+      "Interaction": "(Y_G1-Y_G2)-(Y_G4-Y_G3)"
+    },
+    "primary_family": "three Protocol A continuous matched-seed effects",
+    "sensitivity_family": "same three Protocol B effects; separately labelled, not pooled with A",
+    "confidence_intervals": "Bonferroni simultaneous 95% within each three-effect family; individual confidence 1-0.05/3; Student t df=9",
+    "p_values": "two-sided matched-seed effect t tests with Holm adjustment within each family",
+    "complete_matched_seeds_required": 10,
+    "practical_effect_sensitivity_margins_auc": [
+      0.001,
+      0.002,
+      0.003,
+      0.005
+    ],
+    "margins_are_success_gates": false,
+    "nonsignificance_means_equivalence": false,
+    "recovery_ratio_primary_claim": false,
+    "missingness": "incomplete matched cells block confirmatory ten-seed inference; retain and describe all failures"
+  },
+  "canonical_effective_configuration_sha256": "88d35a3194241bf26b7c4e4eb679e219a058e3ce98825c360cb92bd569145108",
+  "configuration_role": "non-runnable source-verified execution record; private paths removed",
+  "source_archive_sha256": "5f3abc1e0f549fb2e74c0d9a7e4d91e0787b82558ca49a937829144e8cab5a32"
+}

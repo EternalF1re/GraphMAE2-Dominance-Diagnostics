@@ -1,0 +1,30 @@
+{
+  "analysis_source_records": [
+    {
+      "source_id": "completed_factorial_results",
+      "source_archive_sha256": "5f3abc1e0f549fb2e74c0d9a7e4d91e0787b82558ca49a937829144e8cab5a32",
+      "public_data_directory": "processed_records/factorial/",
+      "verification_scope": "80completed matched runs; all560checkpoint leaves and1680probe values verified"
+    },
+    {
+      "source_id": "completed_gradient_geometry",
+      "source_archive_sha256": "1982d3a72c090760d43de7f41bc2e00eb44e138a872b9941909c533217e700c2",
+      "public_data_directory": "processed_records/gradient_geometry/",
+      "verification_scope": "120fixed-state scalar measurements; raw VJP replay not included"
+    },
+    {
+      "source_id": "completed_maskgae_five_dose",
+      "source_archive_sha256": "1d5ad0bb69e7f4552aa51a3293dbd0a50dcc0d2926fab4b9d2a17fd9f50410a2",
+      "public_data_directory": "processed_records/maskgae_pubmed/",
+      "verification_scope": "50completed runs,350checkpoints,1050probes,25000training updates verified"
+    },
+    {
+      "source_id": "conditionally_accepted_reliability_data",
+      "source_archive_sha256": "7019a5a5113a4019f6c1222695879a56034b361b7e077b1e02589c59a670b082",
+      "public_data_directory": "processed_records/estimator_reliability/",
+      "verification_scope": "Numerical evidence conditionally accepted; original formal execution gate failed"
+    }
+  ],
+  "relative_source_mapping": "Per-record hashes and source_record_map CSVs connect public keys to original scalar JSON members; no private filesystem paths are needed.",
+  "unpublished_asset_payloads": "graphs,features,labels,checkpoints,optimizers,raw_Schedules,full_gradients"
+}

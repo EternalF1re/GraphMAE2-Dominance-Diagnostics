@@ -58,6 +58,19 @@ class ZipSafetyTests(unittest.TestCase):
 
 
 class ManifestTests(unittest.TestCase):
+    def test_sha256_substrings_are_not_private_run_timestamps(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            digest = "a"*20 + "2026" + "1106" + "b"*36
+            (root/"records.csv").write_text("value,sha256\n0.1,"+digest+"\n",encoding="utf-8")
+            self.assertEqual(VERIFY.scan_text_and_paths(root), [])
+
+    def test_actual_run_date_still_triggers_privacy_scan(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root/"records.json").write_text(json.dumps({"execution_id":"run_"+"2026"+"1106"}),encoding="utf-8")
+            self.assertTrue(any("run timestamp" in v for v in VERIFY.scan_text_and_paths(root)))
+
     def test_official_manifest_verifies(self) -> None:
         VERIFY.verify_manifest(ROOT)
 
@@ -114,7 +127,7 @@ class FigureIsolationTests(unittest.TestCase):
         VERIFY.verify_records(ROOT)
 
     def test_figure_rerun_does_not_modify_reference_pdf(self) -> None:
-        source = ROOT / "figures" / "figure_1"
+        source = ROOT / "figures" / "historical" / "three_seed_trajectory"
         with tempfile.TemporaryDirectory() as directory:
             copied = Path(directory) / "figure_1"
             shutil.copytree(source, copied)

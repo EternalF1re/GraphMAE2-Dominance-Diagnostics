@@ -77,7 +77,9 @@ def scan_text_and_paths(root: Path) -> list[str]:
             continue
         text = path.read_text(encoding="utf-8-sig", errors="replace")
         for label, pattern in patterns:
-            if pattern.search(text):
+            # SHA256 digit subsequences are identities, not execution dates.
+            scanned = re.sub(r"(?i)(?<![0-9a-f])[0-9a-f]{64}(?![0-9a-f])", "<digest>", text) if label == "run timestamp" else text
+            if pattern.search(scanned):
                 findings.append(f"content:{label}:{relative}")
     return findings
 
@@ -121,7 +123,9 @@ def verify_records(root: Path) -> None:
     assert math.isclose(float(boundaries["wikics"]["later_weighted_ratio"]), 1.1604030792105146e-8, rel_tol=0.0, abs_tol=1e-22)
 
     figure_inputs = {
-        "figures/figure_1/input/validation_trajectory.csv": "processed_records/arxiv/validation_trajectory.csv",
+        "figures/historical/three_seed_trajectory/input/validation_trajectory.csv": "processed_records/arxiv/validation_trajectory.csv",
+        "figures/figure_1/input/checkpoint_validation.csv": "processed_records/factorial/checkpoint_validation.csv",
+        "figures/figure_5/input/checkpoint_validation.csv": "processed_records/maskgae_pubmed/checkpoints.csv",
         "figures/figure_2/input/replication.csv": "processed_records/reddit/replication.csv",
         "figures/figure_3/input/dominance_performance.csv": "processed_records/arxiv/dominance_performance.csv",
         "figures/figure_3/input/cross_dataset_dominance.csv": "processed_records/method_comparisons/cross_dataset_dominance.csv",
@@ -159,7 +163,7 @@ def verify_records(root: Path) -> None:
 
 
 def verify_sync_manifest(root: Path) -> None:
-    path = root / "SOTA_REPOSITORY_SYNC_R1_MANIFEST.csv"
+    path = root / "RELEASE_CONTENT_MANIFEST.csv"
     assert path.is_file()
     rows = read_csv(path)
     excluded = {"MANIFEST.sha256", path.name}
@@ -206,7 +210,10 @@ def verify_inventory(root: Path) -> None:
         "paper_records/ogbn-arxiv_execution_record.json",
         "paper_records/reddit_execution_record.json",
         "paper_records/README.md",
-        "figures/figure_1/plot_validation_trajectory.py",
+        "figures/figure_1/plot_factorial_trajectory.py",
+        "figures/historical/three_seed_trajectory/plot_validation_trajectory.py",
+        "figures/figure_5/plot_maskgae_dose_response.py",
+        "figures/figure_5/figure_5_reference.pdf",
         "figures/figure_2/plot_reddit_replication.py",
         "figures/figure_3/plot_dominance_performance.py",
         "figures/figure_4/plot_protocol_parameters.py",
@@ -225,6 +232,9 @@ def verify_inventory(root: Path) -> None:
         "tables/generated/weighting_method_summary_current.csv",
         "results/sota_extension/overhead/OVERHEAD_COMPLETED_METHODS.csv",
         "SOTA_REPOSITORY_SYNC_R1_MANIFEST.csv",
+        "RELEASE_CONTENT_MANIFEST.csv",
+        "FIGURE_MAP.json", "DATA_DICTIONARY.md", "MANUSCRIPT_CLAIM_MAP.csv",
+        "reproduce_analysis.py",
         "tables/generate_summary_tables.py", "protocols/measurement_rules.md",
         "tables/generated/weighting_method_summary.csv",
         "tables/generated/sampling_design_summary.csv",

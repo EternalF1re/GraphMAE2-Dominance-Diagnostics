@@ -32,3 +32,20 @@ under the MIT terms in `LICENSE-AUTHORS`, with copyright attributed to
 
 Datasets, LC artifacts, model checkpoints, pretrained weights, and third-party
 Python packages are not redistributed.
+
+## MaskGAE analysis and inspection
+
+The PubMed experiment used the MaskGAE implementation at
+https://github.com/EdisonLeeeee/MaskGAE, pinned commit
+`343ced7028681f052b7e9ea47945be7fc5166213`.
+A redistribution license could not be verified in the inspected pinned source.
+Consequently this candidate does NOT vendor the upstream MaskGAE model,
+data-loader or third-party package files, and does not assert a redistribution
+license on the authors' behalf. Obtain those separately and verify their terms.
+
+The new scalar records, CPU analyses and study-authored inspection excerpts
+under `code/analysis/`, `code/experiments/`, `code/measurements/` and the added
+experiment documentation are covered by LICENSE-AUTHORS. Inspection excerpts
+document the measured scientific computation, not a standalone native runtime.
+See `experiments/maskgae_pubmed/README.md` for exact execution/configuration
+provenance and the explicit limits of raw-data reproduction.

@@ -1,0 +1,13 @@
+{
+  "source_archive_sha256": "5f3abc1e0f549fb2e74c0d9a7e4d91e0787b82558ca49a937829144e8cab5a32",
+  "source_id": "frozen_factorial_results",
+  "records": 560,
+  "probe_values": 1680,
+  "completed_runs": 80,
+  "effective_config_identity": "88d35a3194241bf26b7c4e4eb679e219a058e3ce98825c360cb92bd569145108",
+  "matched_initializations_and_schedules": true,
+  "source_hash_columns": [
+    "checkpoint_sha256",
+    "validation_result_sha256"
+  ]
+}

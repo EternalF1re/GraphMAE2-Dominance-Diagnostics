@@ -1,0 +1,12 @@
+{
+  "current": [
+    {"figure": "1", "topic": "GraphMAE2 ten-seed factorial trajectories", "script": "figures/figure_1/plot_factorial_trajectory.py", "reference": "figures/figure_1/figure_1_reference.pdf", "input": "figures/figure_1/input/checkpoint_validation.csv"},
+    {"figure": "2", "topic": "Reddit coefficient response", "script": "figures/figure_2/plot_reddit_replication.py", "reference": "figures/figure_2/figure_2_reference.pdf", "input": "figures/figure_2/input/replication.csv"},
+    {"figure": "3", "topic": "Dominance-performance relationship", "script": "figures/figure_3/plot_dominance_performance.py", "reference": "figures/figure_3/figure_3_reference.pdf", "input": "figures/figure_3/input/dominance_performance.csv"},
+    {"figure": "4", "topic": "Gamma and remasking sensitivity", "script": "figures/figure_4/plot_protocol_parameters.py", "reference": "figures/figure_4/figure_4_reference.pdf", "input": "figures/figure_4/input/protocol_parameter_response.csv"},
+    {"figure": "5", "topic": "MaskGAE five-dose PubMed response", "script": "figures/figure_5/plot_maskgae_dose_response.py", "reference": "figures/figure_5/figure_5_reference.pdf", "input": "figures/figure_5/input/checkpoint_validation.csv"},
+    {"figure": "D.1", "topic": "PCGrad pre-projection conflict histogram", "script": "figures/appendix_conflicts/plot_pcgrad_conflicts.py", "reference": "figures/appendix_conflicts/appendix_conflicts_reference.pdf", "input": "figures/appendix_conflicts/input/pcgrad_conflict_histogram.csv"}
+  ],
+  "superseded_figure1": "figures/historical/three_seed_trajectory/",
+  "legacy_figure2_3_4_and_D1_preserved": true
+}

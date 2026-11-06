@@ -1,4 +1,4 @@
-"""Generate the public R1 provenance manifest during release assembly."""
+"""Generate the current content/provenance manifest during local assembly."""
 
 from __future__ import annotations
 
@@ -7,11 +7,24 @@ import hashlib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "SOTA_REPOSITORY_SYNC_R1_MANIFEST.csv"
+OUTPUT = ROOT / "RELEASE_CONTENT_MANIFEST.csv"
 EXCLUDED = {"MANIFEST.sha256", OUTPUT.name}
 
 
 def provenance(relative: str) -> tuple[str, str]:
+    for directory, source in [
+        ("factorial", "source-verified80 matched trajectories,560 checkpoint records"),
+        ("gradient_geometry", "source-verified120 representation-gradient measurement records"),
+        ("maskgae_pubmed", "source-verified50 completed runs,350 checkpoints,actual clipping updates"),
+        ("estimator_reliability", "conditionally accepted scalar evidence; original execution gate failed")]:
+        if relative.startswith("processed_records/"+directory+"/"):
+            return "processed record", source
+    if relative.startswith("code/analysis/"):
+        return "analysis code", "CPU-only scalar reproduction; no model or asset dependency"
+    if relative.startswith(("code/measurements/", "code/experiments/")):
+        return "scientific implementation", "source-bound scientific formula or inspection excerpt; scope documented"
+    if relative.startswith("tables/revision/"):
+        return "derived table", "deterministic CPU reproduction from released scalar inputs"
     if relative.startswith("figures/"):
         return "figure", "previous public release; figure numbers aligned to manuscript"
     if relative.startswith("code/sota_extension/"):
@@ -26,7 +39,7 @@ def provenance(relative: str) -> tuple[str, str]:
         return "processed record", "previous public release; current comparison assembled from frozen records"
     if relative.startswith("tables/"):
         return "table", "deterministic generation from released processed records"
-    return "release material", "previous public release or R1 documentation/verification"
+    return "release material", "preserved public baseline or current reader-facing documentation/verification"
 
 
 def entries(root: Path = ROOT) -> list[dict[str, object]]:

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import argparse
 import statistics
 from pathlib import Path
 
@@ -72,6 +73,7 @@ def assemble(root: Path = ROOT) -> list[dict[str, object]]:
 
 
 def main() -> None:
+    argparse.ArgumentParser(description=__doc__).parse_args()
     rows = assemble()
     path = ROOT / "processed_records/method_comparisons/weighting_methods_current.csv"
     with path.open("w", encoding="utf-8", newline="") as handle:

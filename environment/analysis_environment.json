@@ -1,0 +1,10 @@
+{
+  "scope": "CPU analysis acceptance only; not inferred historical training environment",
+  "python": "3.13.7",
+  "packages": {
+    "numpy": "2.3.3",
+    "scipy": "1.16.2",
+    "matplotlib": "3.10.7"
+  },
+  "model_imports_required": false
+}

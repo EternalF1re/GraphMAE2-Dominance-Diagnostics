@@ -1,0 +1,382 @@
+{
+  "data_disposition": "CONDITIONAL_ACCEPT_DATA",
+  "execution_disposition": "FAIL_FORMAL_EXECUTION_GATE",
+  "terminal_rss_failure_timing": "UNRESOLVED",
+  "interval_origin": "STORED_NOT_RESAMPLED",
+  "population_coverage_certified": false,
+  "aggregate_metrics": {
+    "stratified_mae": {
+      "point": 0.07730391653991314,
+      "seed_cluster_ci95": [
+        0.07249531817797339,
+        0.0882560235120118
+      ],
+      "independent_units": 10
+    },
+    "stratified_acceptable_fraction": {
+      "point": 0.963,
+      "seed_cluster_ci95": [
+        0.927,
+        0.978
+      ],
+      "independent_units": 10
+    },
+    "uniform_mae": {
+      "point": 0.07581631481816684,
+      "seed_cluster_ci95": [
+        0.07140152229772083,
+        0.08538826154636889
+      ],
+      "independent_units": 10
+    },
+    "uniform_acceptable_fraction": {
+      "point": 0.968,
+      "seed_cluster_ci95": [
+        0.9279999999999999,
+        0.982
+      ],
+      "independent_units": 10
+    },
+    "mae_difference_stratified_minus_uniform": {
+      "point": 0.0014876017217463026,
+      "seed_cluster_ci95": [
+        -0.0015097501375565432,
+        0.0044431373836266615
+      ],
+      "independent_units": 10
+    },
+    "acceptable_fraction_difference": {
+      "point": -0.0050000000000000044,
+      "seed_cluster_ci95": [
+        -0.014000000000000012,
+        0.007000000000000006
+      ],
+      "independent_units": 10
+    },
+    "historical_apparent_reference_point_coverage": {
+      "point": 0.8089999999999999,
+      "seed_cluster_ci95": [
+        0.76,
+        0.836
+      ],
+      "independent_units": 10
+    },
+    "ALL_acceptance_fraction": {
+      "point": 0.738,
+      "seed_cluster_ci95": [
+        0.705,
+        0.766
+      ],
+      "independent_units": 10
+    },
+    "ALL_accepted_mae": {
+      "point": 0.07943535419223971,
+      "seed_cluster_ci95": [
+        0.07390341861190283,
+        0.09108098626774765
+      ],
+      "independent_units": 10
+    },
+    "DROP_CI_acceptance_fraction": {
+      "point": 0.763,
+      "seed_cluster_ci95": [
+        0.736,
+        0.787
+      ],
+      "independent_units": 10
+    },
+    "DROP_CI_accepted_mae": {
+      "point": 0.07859413065380456,
+      "seed_cluster_ci95": [
+        0.07361431609358457,
+        0.08949933846553954
+      ],
+      "independent_units": 10
+    },
+    "DROP_PANEL_acceptance_fraction": {
+      "point": 0.947,
+      "seed_cluster_ci95": [
+        0.9259999999999999,
+        0.963
+      ],
+      "independent_units": 10
+    },
+    "DROP_PANEL_accepted_mae": {
+      "point": 0.07777480236583381,
+      "seed_cluster_ci95": [
+        0.07260926951336612,
+        0.0892340051211073
+      ],
+      "independent_units": 10
+    },
+    "DROP_CHECKPOINT_acceptance_fraction": {
+      "point": 0.738,
+      "seed_cluster_ci95": [
+        0.705,
+        0.766
+      ],
+      "independent_units": 10
+    },
+    "DROP_CHECKPOINT_accepted_mae": {
+      "point": 0.07943535419223971,
+      "seed_cluster_ci95": [
+        0.07390341861190283,
+        0.09108098626774765
+      ],
+      "independent_units": 10
+    },
+    "NONE_OF_THREE_acceptance_fraction": {
+      "point": 1.0,
+      "seed_cluster_ci95": [
+        1.0,
+        1.0
+      ],
+      "independent_units": 10
+    },
+    "NONE_OF_THREE_accepted_mae": {
+      "point": 0.07730391653991314,
+      "seed_cluster_ci95": [
+        0.07249531817797339,
+        0.0882560235120118
+      ],
+      "independent_units": 10
+    }
+  },
+  "seed_bundles": [
+    {
+      "stratified_mae": 0.07091222189600364,
+      "stratified_acceptable_fraction": 0.99,
+      "uniform_mae": 0.06946131576470262,
+      "uniform_acceptable_fraction": 0.99,
+      "mae_difference_stratified_minus_uniform": 0.0014509061313010274,
+      "acceptable_fraction_difference": 0.0,
+      "historical_apparent_reference_point_coverage": 0.84,
+      "ALL_acceptance_fraction": 0.76,
+      "ALL_accepted_mae": 0.069452457091697,
+      "DROP_CI_acceptance_fraction": 0.78,
+      "DROP_CI_accepted_mae": 0.06976119672322899,
+      "DROP_PANEL_acceptance_fraction": 0.96,
+      "DROP_PANEL_accepted_mae": 0.06966682492482017,
+      "DROP_CHECKPOINT_acceptance_fraction": 0.76,
+      "DROP_CHECKPOINT_accepted_mae": 0.069452457091697,
+      "NONE_OF_THREE_acceptance_fraction": 1.0,
+      "NONE_OF_THREE_accepted_mae": 0.07091222189600364
+    },
+    {
+      "stratified_mae": 0.07624298792440731,
+      "stratified_acceptable_fraction": 0.98,
+      "uniform_mae": 0.0744009848507762,
+      "uniform_acceptable_fraction": 0.98,
+      "mae_difference_stratified_minus_uniform": 0.00184200307363111,
+      "acceptable_fraction_difference": 0.0,
+      "historical_apparent_reference_point_coverage": 0.83,
+      "ALL_acceptance_fraction": 0.7,
+      "ALL_accepted_mae": 0.08009595660990426,
+      "DROP_CI_acceptance_fraction": 0.73,
+      "DROP_CI_accepted_mae": 0.08064048166920974,
+      "DROP_PANEL_acceptance_fraction": 0.94,
+      "DROP_PANEL_accepted_mae": 0.0768391555076764,
+      "DROP_CHECKPOINT_acceptance_fraction": 0.7,
+      "DROP_CHECKPOINT_accepted_mae": 0.08009595660990426,
+      "NONE_OF_THREE_acceptance_fraction": 1.0,
+      "NONE_OF_THREE_accepted_mae": 0.07624298792440731
+    },
+    {
+      "stratified_mae": 0.0745143151843051,
+      "stratified_acceptable_fraction": 0.98,
+      "uniform_mae": 0.07851300881607186,
+      "uniform_acceptable_fraction": 1,
+      "mae_difference_stratified_minus_uniform": -0.0039986936317667615,
+      "acceptable_fraction_difference": -0.020000000000000018,
+      "historical_apparent_reference_point_coverage": 0.89,
+      "ALL_acceptance_fraction": 0.73,
+      "ALL_accepted_mae": 0.07552367522372554,
+      "DROP_CI_acceptance_fraction": 0.74,
+      "DROP_CI_accepted_mae": 0.07463885474752935,
+      "DROP_PANEL_acceptance_fraction": 0.96,
+      "DROP_PANEL_accepted_mae": 0.07399646520415218,
+      "DROP_CHECKPOINT_acceptance_fraction": 0.73,
+      "DROP_CHECKPOINT_accepted_mae": 0.07552367522372554,
+      "NONE_OF_THREE_acceptance_fraction": 1.0,
+      "NONE_OF_THREE_accepted_mae": 0.0745143151843051
+    },
+    {
+      "stratified_mae": 0.06831088627610192,
+      "stratified_acceptable_fraction": 0.98,
+      "uniform_mae": 0.06558886141290014,
+      "uniform_acceptable_fraction": 0.98,
+      "mae_difference_stratified_minus_uniform": 0.0027220248632017774,
+      "acceptable_fraction_difference": 0.0,
+      "historical_apparent_reference_point_coverage": 0.8,
+      "ALL_acceptance_fraction": 0.76,
+      "ALL_accepted_mae": 0.07347951088853749,
+      "DROP_CI_acceptance_fraction": 0.77,
+      "DROP_CI_accepted_mae": 0.07389281628612965,
+      "DROP_PANEL_acceptance_fraction": 0.98,
+      "DROP_PANEL_accepted_mae": 0.06852384042675864,
+      "DROP_CHECKPOINT_acceptance_fraction": 0.76,
+      "DROP_CHECKPOINT_accepted_mae": 0.07347951088853749,
+      "NONE_OF_THREE_acceptance_fraction": 1.0,
+      "NONE_OF_THREE_accepted_mae": 0.06831088627610192
+    },
+    {
+      "stratified_mae": 0.07195133253495524,
+      "stratified_acceptable_fraction": 0.97,
+      "uniform_mae": 0.06390757084442082,
+      "uniform_acceptable_fraction": 1,
+      "mae_difference_stratified_minus_uniform": 0.008043761690534418,
+      "acceptable_fraction_difference": -0.030000000000000027,
+      "historical_apparent_reference_point_coverage": 0.84,
+      "ALL_acceptance_fraction": 0.73,
+      "ALL_accepted_mae": 0.07445491626249975,
+      "DROP_CI_acceptance_fraction": 0.76,
+      "DROP_CI_accepted_mae": 0.07304718840714897,
+      "DROP_PANEL_acceptance_fraction": 0.95,
+      "DROP_PANEL_accepted_mae": 0.07398491459273204,
+      "DROP_CHECKPOINT_acceptance_fraction": 0.73,
+      "DROP_CHECKPOINT_accepted_mae": 0.07445491626249975,
+      "NONE_OF_THREE_acceptance_fraction": 1.0,
+      "NONE_OF_THREE_accepted_mae": 0.07195133253495524
+    },
+    {
+      "stratified_mae": 0.07105879816806619,
+      "stratified_acceptable_fraction": 0.98,
+      "uniform_mae": 0.07412638106980733,
+      "uniform_acceptable_fraction": 0.98,
+      "mae_difference_stratified_minus_uniform": -0.0030675829017411393,
+      "acceptable_fraction_difference": 0.0,
+      "historical_apparent_reference_point_coverage": 0.8,
+      "ALL_acceptance_fraction": 0.72,
+      "ALL_accepted_mae": 0.07439956297758346,
+      "DROP_CI_acceptance_fraction": 0.74,
+      "DROP_CI_accepted_mae": 0.07320022152146141,
+      "DROP_PANEL_acceptance_fraction": 0.93,
+      "DROP_PANEL_accepted_mae": 0.0713374502592811,
+      "DROP_CHECKPOINT_acceptance_fraction": 0.72,
+      "DROP_CHECKPOINT_accepted_mae": 0.07439956297758346,
+      "NONE_OF_THREE_acceptance_fraction": 1.0,
+      "NONE_OF_THREE_accepted_mae": 0.07105879816806619
+    },
+    {
+      "stratified_mae": 0.0824011769401361,
+      "stratified_acceptable_fraction": 0.95,
+      "uniform_mae": 0.07626949754556137,
+      "uniform_acceptable_fraction": 0.95,
+      "mae_difference_stratified_minus_uniform": 0.006131679394574735,
+      "acceptable_fraction_difference": 0.0,
+      "historical_apparent_reference_point_coverage": 0.76,
+      "ALL_acceptance_fraction": 0.8,
+      "ALL_accepted_mae": 0.08678720893738531,
+      "DROP_CI_acceptance_fraction": 0.82,
+      "DROP_CI_accepted_mae": 0.08558219938947312,
+      "DROP_PANEL_acceptance_fraction": 0.97,
+      "DROP_PANEL_accepted_mae": 0.0826434731379198,
+      "DROP_CHECKPOINT_acceptance_fraction": 0.8,
+      "DROP_CHECKPOINT_accepted_mae": 0.08678720893738531,
+      "NONE_OF_THREE_acceptance_fraction": 1.0,
+      "NONE_OF_THREE_accepted_mae": 0.0824011769401361
+    },
+    {
+      "stratified_mae": 0.11073428982596531,
+      "stratified_acceptable_fraction": 0.85,
+      "uniform_mae": 0.10350268985712738,
+      "uniform_acceptable_fraction": 0.86,
+      "mae_difference_stratified_minus_uniform": 0.007231599968837932,
+      "acceptable_fraction_difference": -0.010000000000000009,
+      "historical_apparent_reference_point_coverage": 0.69,
+      "ALL_acceptance_fraction": 0.62,
+      "ALL_accepted_mae": 0.11319848970159264,
+      "DROP_CI_acceptance_fraction": 0.68,
+      "DROP_CI_accepted_mae": 0.10907250798006979,
+      "DROP_PANEL_acceptance_fraction": 0.87,
+      "DROP_PANEL_accepted_mae": 0.11270338223557698,
+      "DROP_CHECKPOINT_acceptance_fraction": 0.62,
+      "DROP_CHECKPOINT_accepted_mae": 0.11319848970159264,
+      "NONE_OF_THREE_acceptance_fraction": 1.0,
+      "NONE_OF_THREE_accepted_mae": 0.11073428982596531
+    },
+    {
+      "stratified_mae": 0.06596312438447767,
+      "stratified_acceptable_fraction": 0.99,
+      "uniform_mae": 0.0715496485239088,
+      "uniform_acceptable_fraction": 0.97,
+      "mae_difference_stratified_minus_uniform": -0.005586524139431129,
+      "acceptable_fraction_difference": 0.020000000000000018,
+      "historical_apparent_reference_point_coverage": 0.88,
+      "ALL_acceptance_fraction": 0.79,
+      "ALL_accepted_mae": 0.06591352902711697,
+      "DROP_CI_acceptance_fraction": 0.79,
+      "DROP_CI_accepted_mae": 0.06591352902711697,
+      "DROP_PANEL_acceptance_fraction": 0.97,
+      "DROP_PANEL_accepted_mae": 0.0655648511175067,
+      "DROP_CHECKPOINT_acceptance_fraction": 0.79,
+      "DROP_CHECKPOINT_accepted_mae": 0.06591352902711697,
+      "NONE_OF_THREE_acceptance_fraction": 1.0,
+      "NONE_OF_THREE_accepted_mae": 0.06596312438447767
+    },
+    {
+      "stratified_mae": 0.08095003226471294,
+      "stratified_acceptable_fraction": 0.96,
+      "uniform_mae": 0.08084318949639188,
+      "uniform_acceptable_fraction": 0.97,
+      "mae_difference_stratified_minus_uniform": 0.00010684276832105544,
+      "acceptable_fraction_difference": -0.010000000000000009,
+      "historical_apparent_reference_point_coverage": 0.76,
+      "ALL_acceptance_fraction": 0.77,
+      "ALL_accepted_mae": 0.08104823520235462,
+      "DROP_CI_acceptance_fraction": 0.82,
+      "DROP_CI_accepted_mae": 0.08019231078667768,
+      "DROP_PANEL_acceptance_fraction": 0.94,
+      "DROP_PANEL_accepted_mae": 0.08248766625191419,
+      "DROP_CHECKPOINT_acceptance_fraction": 0.77,
+      "DROP_CHECKPOINT_accepted_mae": 0.08104823520235462,
+      "NONE_OF_THREE_acceptance_fraction": 1.0,
+      "NONE_OF_THREE_accepted_mae": 0.08095003226471294
+    }
+  ],
+  "ablation_counts": {
+    "ALL": {
+      "accepted": 738,
+      "bad_accepted": 27
+    },
+    "DROP_CI": {
+      "accepted": 763,
+      "bad_accepted": 27
+    },
+    "DROP_PANEL": {
+      "accepted": 947,
+      "bad_accepted": 35
+    },
+    "DROP_CHECKPOINT": {
+      "accepted": 738,
+      "bad_accepted": 27
+    },
+    "NONE_OF_THREE": {
+      "accepted": 1000,
+      "bad_accepted": 37
+    }
+  },
+  "verification_targets": {
+    "stratified_mae_percent": 7.7303916539913144,
+    "uniform_mae_percent": 7.581631481816683,
+    "paired_mae_difference_pp": 0.14876017217463025,
+    "all_retained_count": 738,
+    "all_bad_retained_count": 27,
+    "no_refusal_bad_count": 37,
+    "all_retained_mae_seed_equal_percent": 7.943535419223971,
+    "all_retained_mae_pooled_percent": 7.883999759117167,
+    "apparent_reference_point_coverage_percent": 80.9,
+    "reference_max_discrepancy": 0.0762907985708536
+  },
+  "input_sha256": {
+    "batch_scalars.csv": "40cc9ff5d0b3e2004f9368e28fc236384429286fafca1c48a553c541331e80d1",
+    "panels.csv": "dfaaa364ddff93b4a0408fa90a22c93795e2cc7d485814325a4b68a4cfe186f1",
+    "reference_intervals.csv": "2cf6222f719c092b3c5d3438b95bdb049552a1900a23e29a39583ee1a622d934",
+    "stratified_intervals.csv": "43f0957f782e24fde1293bef67d7d34d48bdfbc155bf126a6cb3d75d3f974954"
+  },
+  "gate_failures": {
+    "CI": 53,
+    "PANEL": 237,
+    "CHECKPOINT": 0
+  }
+}

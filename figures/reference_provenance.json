@@ -1,0 +1,26 @@
+{
+  "unchanged_legacy_figures": {
+    "2": {
+      "relative_path": "figures/figure_2/figure_2_reference.pdf",
+      "sha256": "0443d099c0f3ce28daf58120e0938ab55963ead54745af23da7bb64e1b4cfb7d",
+      "source_commit": "d21a076b2be85129995cef61c4954eead4e614f9"
+    },
+    "3": {
+      "relative_path": "figures/figure_3/figure_3_reference.pdf",
+      "sha256": "816ef96d0b4bf43c5e3a556ac5f01f9336342b6609d1d29af6dfb200f14d06bd",
+      "source_commit": "d21a076b2be85129995cef61c4954eead4e614f9"
+    },
+    "4": {
+      "relative_path": "figures/figure_4/figure_4_reference.pdf",
+      "sha256": "17bc9e7b2d035316cef10a12e7fd7c542394234a17bd320179453e9b999170bf",
+      "source_commit": "d21a076b2be85129995cef61c4954eead4e614f9"
+    },
+    "D.1": {
+      "relative_path": "figures/appendix_conflicts/appendix_conflicts_reference.pdf",
+      "sha256": "f1462cc1b3cfaf181dc8a824152a03fdade7a32ea907b96bdacd199fe298f077",
+      "source_commit": "d21a076b2be85129995cef61c4954eead4e614f9"
+    }
+  },
+  "figure1_source": "approved ten-seed trajectory layout",
+  "figure5_source": "approved connected five-dose layout"
+}

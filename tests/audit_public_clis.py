@@ -15,7 +15,9 @@ PUBLIC_CLIS = (
     "code/diagnostics/bootstrap_reference_interval.py",
     "code/diagnostics/sampling.py",
     "code/comparisons/summarize_weighting_methods.py",
-    "figures/figure_1/plot_validation_trajectory.py",
+    "figures/figure_1/plot_factorial_trajectory.py",
+    "figures/figure_5/plot_maskgae_dose_response.py",
+    "figures/historical/three_seed_trajectory/plot_validation_trajectory.py",
     "figures/figure_2/plot_reddit_replication.py",
     "figures/figure_3/plot_dominance_performance.py",
     "figures/figure_4/plot_protocol_parameters.py",
@@ -25,6 +27,7 @@ PUBLIC_CLIS = (
     "tests/generate_manifest.py",
     "tests/build_release_zip.py",
     "tests/verify_release.py",
+    "reproduce_analysis.py",
 )
 
 
